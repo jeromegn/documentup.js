@@ -1,0 +1,12 @@
+env:
+  global:
+    secure: G/EHikk5ndfd5HnfIJcAdW5aaQG37C9wbdYFF66BaTlXkY4p84bW7cc5IIoQAnLdIpc1fgM4fJQwiJBcHe716TUGZMsbeoDKRDWnF2fckK5fLe/gXa+w3ZyCfI5B15t7APcTLHxB6ZXoyPuVupg3+RS4XSqocn/ezISENyJAL/EC8chyrJu8KFTF3xeNZ/5n1xJsQcFgRK6sFTbsw2qRfa/npN0DJ7r4hbOzLlAnzFKKJSlh/686h9B4ENf1hXeLPRw4acF00ibctOeG1BkIHe12jG950ttcAMMIa9KPKJZWmXO0hnVz4vS3zZymhWXUEsHWUFoXs6FnkvipulEUHMHALd+yhVYLnJrbup7SsFheTraonzx/BrAS32Seqa2wrwgN8RamneRG+Kw4mVXuewZbnLIiSxkvzcE1am9w7JsDdgRe1QQh1o1CFnU/k2ZnS+yY0VTd6N1wwrvPvvS3V9IJsg5nH8oYzs242UPSu9m1krdRCab7aKPfyBS7XV9/G8WKXbcbQcNoHnhSLczpY47VzP8lSy0YMIcWInSTkqv9qU3vmjJC5veZlvI7ZcJnKFim1u1nhAopvGvKSq2CV2/BufT+jFLxIkS/u9LYXJpyFT9jFTjtJa9eizvPOnsHWgbyRCQraB13SJaZYxf3HmitrvebHcwdVWJICKBvrHg=
+
+language: node_js
+node_js:
+  - "node"
+  - "8"
+
+script:
+  - ./node_modules/.bin/webpack
+  - ./scripts/deploy.sh
