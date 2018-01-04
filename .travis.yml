@@ -6,8 +6,28 @@ language: node_js
 node_js:
   - "8"
 
-script:
+# compiler: g++
+# install: export CXX="g++-5"
+# addons:
+#   apt:
+#     sources:
+#     - ubuntu-toolchain-r-test
+#     packages:
+#     - g++-5
+# notifications:
+#  email:
+#   on_success: never
+#   on_failure: always
+# before_install: sudo apt-get update -qq
+
+before_install: set -e
+
+install:
+  - npm install
+  - export CXX="g++-5"
   - npm install -g @flyio/cli
+
+script:
   - npm test
   - ./node_modules/.bin/webpack
   - ./scripts/deploy.sh
