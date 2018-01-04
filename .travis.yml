@@ -20,11 +20,20 @@ node_js:
 #   on_failure: always
 # before_install: sudo apt-get update -qq
 
-before_install: set -e
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-5
+    - g++-5
+
+before_install:
+  - set -e
 
 install:
   - npm install
-  - export CXX="g++-5"
+  # - export CXX="g++-5"
   - npm install -g @flyio/cli
 
 script:
