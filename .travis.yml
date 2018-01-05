@@ -6,20 +6,6 @@ language: node_js
 node_js:
   - "8"
 
-# compiler: g++
-# install: export CXX="g++-5"
-# addons:
-#   apt:
-#     sources:
-#     - ubuntu-toolchain-r-test
-#     packages:
-#     - g++-5
-# notifications:
-#  email:
-#   on_success: never
-#   on_failure: always
-# before_install: sudo apt-get update -qq
-
 addons:
   apt:
     sources:
@@ -38,5 +24,4 @@ install:
 
 script:
   - npm test
-  - ./node_modules/.bin/webpack
-  - ./scripts/deploy.sh
+  - fly deploy -a js-documentup-com

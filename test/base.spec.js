@@ -2,6 +2,8 @@ require('../src')
 global.window = global
 const fetchMock = require('fetch-mock')
 
+import { expect } from 'chai'
+
 describe('documentup', () => {
   before(() => {
     fetchMock.mock("*", new Response(`# Hello world`))
