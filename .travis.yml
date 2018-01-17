@@ -20,7 +20,6 @@ before_install:
 install:
   - npm install
   - export CXX="g++-5"
-  - npm install -g @flyio/cli
 
 script:
   - npm test
