@@ -3,4 +3,7 @@ module.exports = class Repository {
     this.login = login
     this.repo = repo
   }
+  displayName() {
+    return this.repo
+  }
 }

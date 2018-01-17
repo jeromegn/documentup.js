@@ -1,6 +1,7 @@
 const css = require('./stylesheets/index.scss').toString()
 const Router = require('routes')
 const Renderer = require('./renderer')
+const Repository = require('./repository')
 
 const pageTpl = require('./views/page.pug')
 
@@ -18,11 +19,14 @@ router.addRoute("/:login/:repo", async function (event, params) {
   event.respondWith(new Response(await renderRepo(params.login, params.repo)), { headers: { 'content-type': "text/html" } })
 })
 
-async function renderRepo(login, repo) {
-  const renderer = new Renderer(login, repo)
-  let html = renderer.render(await (await fetch(`https://cdn.rawgit.com/${login}/${repo}/master/README.md`)).text())
-  return pageTpl({ html: html })
+async function renderRepo(login, repoName) {
+  const repo = new Repository(login, repoName)
+  const renderer = new Renderer(login, repoName)
+  let result = renderer.render(await (await fetch(`https://cdn.rawgit.com/${login}/${repoName}/master/README.md`)).text())
+  return pageTpl({ html: result.body, tableOfContents: result.tableOfContents, repository: repo })
 }
+
+console.log("before fetch")
 
 addEventListener("fetch", async function (event) {
   const { request, respondWith } = event
@@ -36,3 +40,4 @@ addEventListener("fetch", async function (event) {
   if (res instanceof Promise)
     await res
 })
+console.log("after fetch")
