@@ -16,10 +16,10 @@ addons:
 
 before_install:
   - set -e
+  - export CXX="g++-5"
 
 install:
   - npm install
-  - export CXX="g++-5"
 
 script:
   - npm test
