@@ -12,18 +12,39 @@ router.addRoute("/screen.css", function (event, params) {
 })
 
 router.addRoute("/", async function (event, params) {
-  event.respondWith(new Response(await renderRepo("jeromegn", "DocumentUp")), { headers: { 'content-type': "text/html" } })
+  event.respondWith(await renderRepo("jeromegn", "DocumentUp"))
 })
 
 router.addRoute("/:login/:repo", async function (event, params) {
-  event.respondWith(new Response(await renderRepo(params.login, params.repo)), { headers: { 'content-type': "text/html" } })
+  event.respondWith(await renderRepo(params.login, params.repo))
 })
 
 async function renderRepo(login, repoName) {
-  const repo = new Repository(login, repoName)
-  const renderer = new Renderer(login, repoName)
-  let result = renderer.render(await (await fetch(`https://cdn.rawgit.com/${login}/${repoName}/master/README.md`)).text())
-  return pageTpl({ html: result.body, tableOfContents: result.tableOfContents, repository: repo })
+  const response = await fetch(`https://cdn.rawgit.com/${login}/${repoName}/master/README.md`)
+  const renderFn = async function(){
+    const repo = new Repository(login, repoName)
+    const renderer = new Renderer(login, repoName)
+    let result = renderer.render(await response.text())
+    return pageTpl({ html: result.body, tableOfContents: result.tableOfContents, repository: repo })
+  }
+  let cacheStatus = "MISS"
+
+  if(response.status != 200){
+    return new Response("four-oh-four", {status: 404})
+  }
+  const key = login + "/" + repoName + ":" + response.headers.get("etag")
+  let body = await fly.cache.getString(key)
+
+  if(!body){
+    console.log("cache miss:", key)
+    body = await renderFn()
+    await fly.cache.set(key, body, 3600)
+  }else{
+    console.log("cache hit:", key)
+    cacheStatus = "HIT"
+  }
+
+  return new Response(body, { headers: { 'content-type': 'text/css', 'x-cache': cacheStatus } })
 }
 
 console.log("before fetch")
