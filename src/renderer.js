@@ -6,9 +6,10 @@ module.exports = class Renderer {
     this.renderer = new marked.Renderer()
 
     this.renderer.heading = (text, level, raw) => {
+      const id = raw.toLowerCase().replace(/\s+/, "-").replace(/[^\w-]+/, "")
       if (level > 1)
-        this.tableOfContents.push({ level: level, text: text })
-      return `<h${level} id="${raw.toLowerCase().replace(/\s+/, "-").replace(/[^\w-]+/, "")}">${text}</h${level}>\n`
+        this.tableOfContents.push({ id: id, level: level, text: text })
+      return `<h${level} id="${id}">${text}</h${level}>\n`
     }
 
     this.renderer.image = function (src, title, alt) {

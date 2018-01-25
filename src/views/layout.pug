@@ -16,6 +16,7 @@ html
         #sections.section
           ul.section-nav
             each navItem in tableOfContents
-              li(class=`h${navItem.level}`) #{navItem.text}
+              li(class=`h${navItem.level}`)
+                a(href=`#${navItem.id}`) #{navItem.text}
       #content
         block content
