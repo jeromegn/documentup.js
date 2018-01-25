@@ -52,6 +52,7 @@ Full rewrite of the app:
 - Runs as [Fly Edge Application](https://fly.io/mix/edge-applications)
 - Removed compilation endpoints
 - Cache rendered markdown for an hour (vary by etag)
+- Use Github's CDN for raw markdown
 
 #### 2.0 (June 15, 2015)
 

@@ -20,7 +20,7 @@ router.addRoute("/:login/:repo", async function (event, params) {
 })
 
 async function renderRepo(login, repoName) {
-  const response = await fetch(`https://cdn.rawgit.com/${login}/${repoName}/master/README.md`)
+  const response = await fetch(`https://raw.githubusercontent.com/${login}/${repoName}/master/README.md`)
   const renderFn = async function(){
     const repo = new Repository(login, repoName)
     const renderer = new Renderer(login, repoName)
