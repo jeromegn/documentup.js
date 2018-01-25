@@ -8,15 +8,15 @@ const pageTpl = require('./views/page.pug')
 var router = Router()
 
 router.addRoute("/screen.css", function (event, params) {
-  event.respondWith(new Response(css, { headers: { 'content-type': 'text/css' } }))
+  return new Response(css, { headers: { 'content-type': 'text/css' } })
 })
 
 router.addRoute("/", async function (event, params) {
-  event.respondWith(await renderRepo("jeromegn", "DocumentUp"))
+  return await renderRepo("jeromegn", "DocumentUp")
 })
 
 router.addRoute("/:login/:repo", async function (event, params) {
-  event.respondWith(await renderRepo(params.login, params.repo))
+  return await renderRepo(params.login, params.repo)
 })
 
 async function renderRepo(login, repoName) {
@@ -44,21 +44,20 @@ async function renderRepo(login, repoName) {
     cacheStatus = "HIT"
   }
 
-  return new Response(body, { headers: { 'content-type': 'text/css', 'x-cache': cacheStatus } })
+  return new Response(body, { headers: { 'content-type': 'text/html', 'x-cache': cacheStatus } })
 }
 
 console.log("before fetch")
 
-addEventListener("fetch", async function (event) {
+addEventListener("fetch", function (event) {
   const { request, respondWith } = event
   const path = new URL(request.url).pathname
   let match = router.match(path)
 
-  if (!match)
-    return respondWith(new Response("docup not found", { status: 404 }))
-
-  let res = match.fn(event, match.params)
-  if (res instanceof Promise)
-    await res
+  if (!match){
+    event.respondWith(new Response("docup not found", { status: 404 }))
+  }else{
+    event.respondWith(match.fn(event, match.params))
+  }
 })
 console.log("after fetch")
