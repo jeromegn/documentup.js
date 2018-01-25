@@ -9,91 +9,9 @@ Automatically generated documentation sites for your markdown files! There are v
 
 ## Hosted
 
-DocumentUp hosts your documentation sites. Just visit `http://documentup.com/username/repository` to generate a site from your `README.md`.
+DocumentUp hosts your documentation sites. Just visit `http://jsdocumentup.com/username/repository` to generate a site from your `README.md`.
 
 Recommended if you have a public Github repository.
-
-### CNAME
-
-You can point a CNAME to `project.username.documentup.com`.
-
-### Configuration
-
-Add a `.documentup.yml` dotfile file to the root of your repository. Refer to the [options](#options) section below for its contents. Feel free to consult this repository's [`.documentup.yml`](.documentup.yml)
-
-### JSONP example with jQuery
-
-```javascript
-$.ajax({
-  url: "http://documentup.com/compiled",
-  dataType: "jsonp",
-  data: {
-    content: "# test",
-    name: "Test JSONP!"
-  },
-  success: function(resp){
-    // `status` is always provided
-    if (resp.status == 200) {
-      // Write to your document
-      document.open();
-      document.write(resp.html);
-      document.close();
-    }
-  }
-});
-```
-
-## gh-pages
-
-For those wanting to stay within the comfort of their gh-pages branch, it's still possible by using an `index.html` file similar to this:
-
-```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <script src="documentup.min.js"></script>
-    <script>
-      DocumentUp.document("username/repository");
-    </script>
-  </head>
-  <body></body>
-</html>
-```
-
-Make sure to change the `"username/repository"` to the repository's name and user's username.
-
-Use the [`documentup.min.js`](public/documentup.min.js) file in this repository, not the one what used to be on cdnjs.com, it's deprecated.
-
-### Configuration
-
-`DocumentUp.document` accepts either a String or an Object representing your desired configuration. If an object is used, remember to add a `repo` option containing the path `"username/repository"` to your github repository.
-
-All options detailed in the [options](#options) section are available.
-
-In addition to those, one special option is available to "gh-pages version" of DocumentUp:
-
-**afterRender** (Function)  
-A function to be executed after the document has been replaced with the compiled HTML.
-
-### Example
-
-```javascript
-DocumentUp.document({
-  repo:  "jeromegn/documentup",
-  name: "DocumentUp",
-  twitter: [
-    "jeromegn",
-    "DocumentUp"
-  ],
-  afterRender: function(){
-    alert("rendered");
-  }
-});
-```
-
-### What this script does
-
-It does what's written in the JSONP section, without the jQuery dependency. It uses a endpoint like: `http://documentup.com/username/repository?callback=` to fetch the cached copy of the repository and then replaces the page's html with the generated documentation.
 
 ## Formatting guide
 
@@ -116,63 +34,6 @@ Some intro text if you want.
 
 #### This wouldn't show up in the sidebar
 ```
-
-## Options
-
-### name
-
-*String, default: repository name*
-
-Name of your project. It'll appear in the header of the sidebar. Defaults to the `repository` substring of the `repo` option.
-
-### color
-
-*String, default: "#336699"*
-
-CSS-like color representing the color for the links both in the sidebar and the content.
-
-### theme
-
-*String, default: null*
-
-Name of the theme to use. Refer to the [themes](#themes) sections.
-
-### issues
-
-*Boolean, default: true*
-
-Adds a link to the sidebar for the issues tab of the repository if `true`. Also accepts a string if your issues are managed elsewhere.
-
-### travis
-
-*Boolean, default: false*
-
-Indicate if the project is being tested by [Travis-CI](http://travis-ci.org/). If `true`, it'll add the small travis badge in the sidebar.
-
-### twitter
-
-*String / Array of strings, default: null*
-
-Add follow buttons for one or more Twitter accounts to your sidebar. Useful to gather followers.
-
-### google_analytics
-
-*String default: null*
-
-This is your Google Analytics "UA" unique ID. Adds GA tracking to your generated documentation.  
-e.g.: "UA-5201171-14"
-
-## Themes
-
-### Default
-
-The one you're looking at now.
-
-### V1
-
-For the nostalgic. Use `v1` in your `theme` config option.
-
-![V1](src/images/v1.png)
 
 ## Roadmap
 
