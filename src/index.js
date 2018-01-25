@@ -12,7 +12,7 @@ router.addRoute("/screen.css", function (event, params) {
 })
 
 router.addRoute("/", async function (event, params) {
-  return await renderRepo("jeromegn", "DocumentUp")
+  return await renderRepo("superfly", "documentup.js")
 })
 
 router.addRoute("/:login/:repo", async function (event, params) {
