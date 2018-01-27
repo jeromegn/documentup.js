@@ -1,0 +1,27 @@
+html
+  head
+    meta(charset="utf-8")
+    meta(name="apple-mobile-web-app-capable" content="yes")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title DocumentUp
+
+    link(href='//fonts.googleapis.com/css?family=Source+Code+Pro:400,700|Alegreya:400italic,700italic,400,700' rel='stylesheet' type='text/css')
+    link(rel="stylesheet" type="text/css" href="/screen.css" media="all")
+    
+  body
+    - let commentsList = comments
+    table(width="100%", border=0)
+      tbody
+        while commentsList
+          - let current = commentsList.data
+          - let nextList = commentsList.next
+          - let nextComment = nextList ? nextList.data : null
+          tr
+            td(width="33%" valign="top" style="vertical-align:top;")
+              pre=current.content
+            td(width="66%" valign="top" style="vertical-align:top;")
+              if nextList
+                pre: code=source.slice(Math.max(current.codeStart - 1, 0), nextComment.begin - 1).join("\n")
+              else
+                pre: code=source.slice(current.codeStart).join("\n")
+          - commentsList = nextList

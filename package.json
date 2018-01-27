@@ -26,5 +26,10 @@
     "to-string-loader": "^1.1.5",
     "webpack": "^3.10.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@fly/fly": "^0.5.8",
+    "array-to-linkedlist": "^0.1.1",
+    "multilang-extract-comments": "^0.3.0",
+    "split-lines": "^1.1.0"
+  }
 }
