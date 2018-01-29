@@ -2,16 +2,9 @@
 
 **This site has been generated with DocumentUp** (eat your own dog food, people)
 
-Automatically generated documentation sites for your markdown files! There are various ways of getting your documentation going:
+Automatically generated documentation sites for your markdown files!
 
-* [Hosted](#hosted)
-* [gh-pages](#gh-pages)
-
-## Hosted
-
-DocumentUp hosts your documentation sites. Just visit `http://jsdocumentup.com/username/repository` to generate a site from your `README.md`.
-
-Recommended if you have a public Github repository.
+DocumentUp hosts your documentation sites. Just visit `http://js.documentup.com/username/repository` to generate a site from your `README.md`.
 
 ## Formatting guide
 
