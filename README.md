@@ -1,6 +1,6 @@
 ![DocumentUp](src/images/logo.png)
 
-**This site has been generated with DocumentUp** (eat your own dog food, people)
+**This site has been generated with DocumentUp** (eat your own [dog food](src/index.js), people)
 
 Automatically generated documentation sites for your markdown files!
 
