@@ -60,8 +60,11 @@ async function renderCode(login, repoName, filePath) {
   const response = await fetch(`https://raw.githubusercontent.com/${login}/${repoName}/master/${filePath}`)
   const source = await response.text()
   const comments = commentExtractor(source)
+  const lines = splitLines(source)
+  console.log("code has lines:", lines.length)
+  console.log("found comment blocks:", Object.values(comments).length)
 
-  const body = codeTpl({ comments: arrayToLinkedlist(Object.values(comments)), source: splitLines(source) })
+  const body = codeTpl({ comments: arrayToLinkedlist(Object.values(comments)), source: lines })
 
   return new Response(body, { headers: { 'content-type': 'text/html' } })
 }

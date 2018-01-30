@@ -4,6 +4,7 @@ module.exports = class Renderer {
   constructor(login, repo) {
     this.tableOfContents = []
     this.renderer = new marked.Renderer()
+    this.baseUrl = `/${login}/${repo}/`
 
     this.renderer.heading = (text, level, raw) => {
       const id = raw.toLowerCase().replace(/\s+/, "-").replace(/[^\w-]+/, "")
@@ -20,7 +21,7 @@ module.exports = class Renderer {
   }
 
   render(markdown) {
-    const body = marked(markdown, { renderer: this.renderer })
+    const body = marked(markdown, { renderer: this.renderer, baseUrl: this.baseUrl })
     return {
       tableOfContents: this.tableOfContents,
       body: body
