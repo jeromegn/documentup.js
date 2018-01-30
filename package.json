@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@flyio/fly": "^0.2.6",
+    "@fly/fly": "^0.6.1",
     "autoprefixer": "^7.2.3",
     "base64-inline-loader": "^1.1.0",
     "chai": "^4.1.2",
