@@ -31,10 +31,15 @@ html
             - let nextList = commentsList.next
             - let nextComment = nextList ? nextList.data : null
             dt.annotation
-              p #{current.content}
+              != markdown.render(current.content).body
             dd.code
+              - let code = ''
               if nextList
-                pre: code=source.slice(Math.max(current.codeStart - 1, 0), nextComment.begin - 1).join("\n")
+                - code = source.slice(Math.max(current.codeStart - 1, 0), nextComment.begin - 1).join("\n")
               else
-                pre: code=source.slice(current.codeStart).join("\n")
+                - code = source.slice(current.codeStart).join("\n")
+              - code = hljs.highlightAuto(code)
+              pre
+                code.hljs(class=code.language)
+                  != code.value
             - commentsList = nextList

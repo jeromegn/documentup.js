@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   resolve: {
-    extensions: ['.js', '.css', '.scss', '.pug']
+    extensions: ['.js', '.css', '.scss', '.pug', '.md']
   },
   output: {
     filename: 'documentup.js',
@@ -20,6 +20,10 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['pug-loader']
+      },
+      {
+        test: /\.md$/,
+        use: ['raw-loader']
       }
     ]
   }
