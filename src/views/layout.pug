@@ -18,15 +18,14 @@ html
     //- Stylesheets
     link(rel="stylesheet" type="text/css" href="/screen.css" media="all")
 
-  body
-    #container
-      #nav
-        #header
-          a(href="#" id="logo")= repository.displayName()
-        #sections.section
-          ul.section-nav
-            each navItem in tableOfContents
-              li(class=`h${navItem.level}`)
-                a(href=`#${navItem.id}`) #{navItem.text}
-      #content
+  body.app
+
+    //- Main content
+    main(role="main")
+      header(role="banner")
+        a(href="#" id="logo")= repository.displayName()
+      section.primary-content
         block content
+      nav.secondary-content
+        each navItem in tableOfContents
+          a(href=`#${navItem.id}`) #{navItem.text}
