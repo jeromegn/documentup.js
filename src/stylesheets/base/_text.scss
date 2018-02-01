@@ -1,0 +1,292 @@
+/* ========================================================================== *
+ * Text module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * Utility
+ * ------------------------------------- */
+
+// Inline links
+@mixin inline-link($color: $blue-2) {
+  text-decoration: underline;
+  text-decoration-color: rgba($color, .4);
+  transition: $duration;
+
+  // Default state
+  @include normal {
+    color: $color;
+    text-decoration-color: rgba($color, .4);
+  }
+
+  // Active state
+  @include active {
+    color: $color;
+    text-decoration-color: $color;
+  }
+}
+
+// Pills
+@mixin pill {
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 600;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: $black-1;
+  color: $white-1;
+}
+
+/* ===================================== *
+ * Common
+ * ------------------------------------- */
+
+body,
+input,
+select,
+button,
+textarea {
+  color: $black-3;
+  font-family: $base-font;
+  line-height: $base-line-height;
+  @include font-smoothing;
+}
+
+/* ===================================== *
+ * Heading
+ * ------------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+}
+
+@for $i from 1 through length($headings) {
+  h#{$i} {
+    font-size: map-get($headings, $i);
+  }
+}
+
+/* ===================================== *
+ * Paragraph
+ * ------------------------------------- */
+
+
+/* ===================================== *
+ * Blockquote
+ * ------------------------------------- */
+
+// Blockquotes
+blockquote {
+  font-size: 28px;
+  color: $gray-3;
+  line-height: 45px;
+  border-top: 14px solid transparent;
+  margin-bottom: 31px;
+  padding-left: 30px;
+
+  p {
+    padding-top: 0;
+    margin-bottom: 0;
+
+    &:first-of-type {
+      text-indent: -.325em;
+    }
+
+    &:first-of-type:before {
+      content: '“';
+    }
+
+    &:last-of-type:after {
+      content: '”';
+    }
+  }
+
+  p + p {
+    padding-top: 30px;
+  }
+
+  cite {
+    display: block;
+    font-size: 16px;
+    font-style: normal;
+    padding-top: 26px;
+    padding-bottom: 4px;
+    line-height: 30px;
+    font-weight: 700;
+
+    a {
+      // @include inline-link($capecod, $cerulean);
+    }
+  }
+}
+
+/* ===================================== *
+ * Inline
+ * ------------------------------------- */
+
+// Bold text
+b,
+strong {
+  font-weight: 700;
+}
+
+// Subscripts & superscripts
+sub,
+sup {
+  vertical-align: baseline;
+  position: relative;
+  line-height: 0;
+  font-size: 75%;
+}
+
+sub {
+  bottom: -.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// Highlighted marks
+mark {
+  background: lighten($yellow-1, 15);
+}
+
+// Definitions & Abbreviations
+dfn[title],
+abbr[title] {
+  position: relative;
+  cursor: help;
+  font-style: normal;
+  border-bottom: 1px dashed $gray-3;
+
+  &:after,
+  &:before {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    transition: $duration;
+  }
+
+  &:after {
+    content: attr(title);
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: $white-1;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 2px 10px;
+    border-radius: $radius;
+    background: $black-3;
+  }
+
+  &:before {
+    content: '';
+    left: calc(50% - 5px);
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 6px 5px;
+    border-color: transparent transparent $black-3 transparent;
+  }
+
+  &:hover:after,
+  &:hover:before {
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+// Links & buttons
+a,
+button {
+  cursor: pointer;
+}
+
+a {
+  @include inline-link;
+}
+
+/* ===================================== *
+ * Horizontal rule
+ * ------------------------------------- */
+
+hr {
+  border: solid $gray-1;
+  border-width: 1px 0 0 0;
+}
+
+/* ===================================== *
+ * Preformatted text
+ * ------------------------------------- */
+
+pre,
+code,
+kbd,
+samp {
+  font-family: $mono-font;
+  direction: ltr;
+  text-align: left;
+  tab-size: 2;
+  hyphens: none;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre {
+  overflow: auto;
+  padding: 2px 6px;
+  border-radius: $radius;
+  background: $white-1;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+pre > code,
+pre > kbd,
+pre > samp {
+  font-size: 1em;
+}
+
+:not(pre) > code,
+:not(pre) > kbd,
+:not(pre) > samp {
+  line-height: 0;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  border-radius: $radius;
+  padding: 0 4px;
+  background: $white-2;
+  box-shadow: 0 0 0 1px $gray-1 inset;
+}
+
+/* ===================================== *
+ * Text alignment
+ * ------------------------------------- */
+
+.text-left {
+  text-align: left;
+
+  table &:first-child .button:last-child {
+    margin-right: -8px;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+
+  table &:last-child .button:last-child {
+    margin-right: -8px;
+  }
+}

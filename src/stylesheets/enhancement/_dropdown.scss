@@ -1,0 +1,119 @@
+/* ========================================================================== *
+ * j. Dropdown module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * i. Utility
+ * ------------------------------------- */
+
+// Navigation dropdowns
+@mixin dropdown($align: center) {
+
+  // Define default variables
+  $left: 50%;
+  $right: null;
+  $triangle: 50%;
+  $transform-normal: translateX(-50%) rotateX(-15deg);
+  $transform-active: translateX(-50%) rotateX(0);
+
+  // Define alignment-based variables
+  @if $align == left {
+    $left: 0;
+    $right: null;
+    $triangle: 20px;
+    $transform-normal: rotateX(-15deg);
+    $transform-active: rotateX(0);
+  } @else if $align == right {
+    $left: null;
+    $right: 0;
+    $triangle: calc(100% - 20px);
+    $transform-normal: rotateX(-15deg);
+    $transform-active: rotateX(0);
+  }
+
+  perspective: 600px;
+  padding: 0;
+  cursor: pointer;
+  z-index: 1;
+
+  a {
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 13px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  @include active {
+    dd {
+      opacity: 1;
+      transform: $transform-active;
+      top: 100%;
+      transition:
+        transform $duration,
+        opacity $duration,
+        top 0s 0s;
+    }
+  }
+
+  // Dropdown nav
+  dt {
+    margin: 0;
+    padding: 0;
+  }
+
+  // Dropdown body
+  dd {
+    display: flex;
+    flex-direction: column;
+    min-width: 100%;
+    position: absolute;
+    top: -9999px;
+    left: $left;
+    right: $right;
+    opacity: 0;
+    background: $black-1;
+    border-radius: $radius;
+    transform: $transform-normal;
+    transform-origin: 50% 0 ;
+    transition:
+      transform $duration,
+      opacity $duration,
+      top 0s $duration;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 12px;
+      height: 12px;
+      position: absolute;
+      top: -5px;
+      left: $triangle;
+      margin-left: -6px;
+      background: inherit;
+      border-radius: 4px 0 0 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  dd a {
+    color: $gray-2;
+    transition: color $duration;
+    padding: 3px 15px;
+
+    &:first-child {
+      padding-top: 6px;
+    }
+
+    &:last-child {
+      padding-bottom: 6px;
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: $white-1;
+    }
+  }
+}

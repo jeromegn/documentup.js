@@ -1,0 +1,85 @@
+/* ========================================================================== *
+ * Table module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * Common
+ * ------------------------------------- */
+
+table {
+  vertical-align: top;
+  border-spacing: 0;
+}
+
+tr {
+  background: $white-1;
+}
+
+th,
+td {
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  padding: 6px 10px;
+}
+
+td {
+  padding: 6px 10px;
+}
+
+caption {
+  display: none;
+}
+
+// Ruled cells
+table.ruled {
+  tfoot th,
+  tbody tr:nth-child(n+2) th,
+  tbody tr:nth-child(n+2) td {
+    border-top: 1px solid $gray-1;
+  }
+
+  thead th {
+    border-bottom: 1px solid $gray-1;
+  }
+}
+
+// Outlined cells
+table.outlined {
+  border-collapse: collapse;
+
+  td,
+  th {
+    border: 1px solid $gray-1;
+  }
+}
+
+// Striped rows
+table.striped {
+  tbody tr:nth-child(2n+1) {
+    background: $white-2;
+  }
+}
+
+// Equal-width columns
+table.stretched {
+  table-layout: fixed;
+  min-width: 100%;
+}
+
+// Expand last column
+table.expanded {
+  width: auto;
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+
+  tr > td:last-child,
+  tr > th:last-child {
+    width: 100%;
+  }
+}

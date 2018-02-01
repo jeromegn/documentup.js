@@ -1,0 +1,185 @@
+// Light theme
+.highlight {
+  color: $black-2;
+  background: $white-2;
+
+  table td {
+    padding: 5px;
+  }
+
+  table pre {
+    margin: 0;
+  }
+
+  .n,
+  .kc,
+  .kd,
+  .kp,
+  .kr,
+  .kt,
+  .nb,
+  .nt {
+    color: #1B9AF7;
+  }
+
+  .k,
+  .na,
+  .no,
+  .mf,
+  .mh,
+  .mi,
+  .mo,
+  .vc,
+  .vg,
+  .vi,
+  .il {
+    color: #8BD300;
+  }
+
+  .o {
+    color: #7B72E9;
+  }
+
+  .m,
+  .ne,
+  .nd,
+  .nn,
+  .nv,
+  .nx,
+  .ow,
+  .bp {
+    color: #ED4694;
+  }
+
+  .c,
+  .w,
+  .cm,
+  .cp,
+  .c1,
+  .cs,
+  .gh,
+  .go,
+  .gp,
+  .gu {
+    color: #888;
+  }
+
+  .gr,
+  .gt,
+  .err {
+    color: #FF4351;
+  }
+
+  .s,
+  .sb,
+  .sc,
+  .sd,
+  .s2,
+  .se,
+  .sh,
+  .si,
+  .sx,
+  .sr,
+  .s1 {
+    color: #FC880F;
+  }
+
+  .nc,
+  .ni,
+  .nf {
+    color: #7B72E9;
+  }
+
+  .ss {
+    color: #DB49D8;
+  }
+}
+
+// Dark theme
+.lowlight {
+  background: #122B3B;
+  color: $white-2;
+
+  table td {
+    padding: 5px;
+  }
+
+  table pre {
+    margin: 0;
+  }
+
+  .n,
+  .kc,
+  .kd,
+  .kp,
+  .kr,
+  .kt,
+  .nb,
+  .nt {
+    color: #1B9AF7;
+  }
+
+  .k,
+  .na,
+  .no,
+  .mf,
+  .mh,
+  .mi,
+  .mo,
+  .vc,
+  .vg,
+  .vi,
+  .il {
+    color: #8BD300;
+  }
+
+  .m,
+  .ne,
+  .nd,
+  .nn,
+  .nv,
+  .nx,
+  .bp {
+    color: #ED4694;
+  }
+
+  .c,
+  .w,
+  .cm,
+  .cp,
+  .c1,
+  .cs,
+  .gh,
+  .go,
+  .gp,
+  .gu {
+    color: #888;
+  }
+
+  .gr,
+  .gt,
+  .err {
+    color: #FF4351;
+  }
+
+  .s,
+  .sb,
+  .sd,
+  .s2,
+  .sh,
+  .sx,
+  .sr,
+  .s1 {
+    color: #FC880F;
+  }
+
+  .nc,
+  .ni,
+  .nf {
+    color: #7B72E9;
+  }
+
+  .ss {
+    color: #B76AC4;
+  }
+}

@@ -1,0 +1,96 @@
+/* ========================================================================== *
+ * List module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * Utility
+ * ------------------------------------- */
+
+// Remove styling from unordered lists
+@mixin unstyle {
+  list-style: none;
+
+  li {
+    margin-left: 0;
+  }
+}
+
+// Unstyle list
+%unstyle {
+  @include unstyle;
+}
+
+// Style
+%list-style {
+  li {
+    margin-left: 1em;
+  }
+}
+
+/* ===================================== *
+ * Unordered
+ * ------------------------------------- */
+
+ul {
+  @extend %list-style;
+  list-style-type: disc;
+
+  // Bare unordered list vertical rhythm
+  li > &,
+  dd > & {
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Nested unordered lists
+ul ul {
+  list-style-type: circle;
+}
+
+ul ul ul {
+  list-style-type: square;
+}
+
+/* ===================================== *
+ * Ordered
+ * ------------------------------------- */
+
+// Ordered lists
+ol {
+  counter-reset: item;
+  list-style-type: none;
+  padding-top: 9px;
+  margin-bottom: 21px;
+
+  li {
+    padding-left: 1.5em;
+    position: relative;
+  }
+
+  // Bare unordered list vertical rhythm
+  li > &,
+  dd > & {
+    padding-top: 0;
+    margin-bottom: 0;
+  }
+
+  > li:before {
+    content: counter(item) '.';
+    counter-increment: item;
+    position: absolute;
+    left: 0;
+    line-height: inherit;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+// Nested ordered lists
+ol ol > li:before {
+  content: counter(item, upper-alpha) '.';
+}
+
+ol ol ol > li:before {
+  content: counter(item, upper-roman) '.';
+}
