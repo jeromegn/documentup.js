@@ -1,4 +1,11 @@
-port: 4000
+default: &default
+  app_id: documentup
 
-app:
-  id: js-documentup-com
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
