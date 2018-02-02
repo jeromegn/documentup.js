@@ -1,8 +1,9 @@
 default: &default
-  app_id: documentup
+  app_id: fly/documentup
 
 development:
   <<: *default
+  app_id: super-fly/documentup
 
 test:
   <<: *default
