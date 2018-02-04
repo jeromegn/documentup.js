@@ -22,10 +22,10 @@ html
 
     //- Main content
     main(role="main")
-      header(role="banner")
-        a(href="#" id="logo")= repository.displayName()
-      section.primary-content
+      section.view-content
+        nav.secondary-content
+          a(href="#" id="logo")= repository.displayName()
+          each navItem in tableOfContents
+            a(href=`#${navItem.id}`) #{navItem.text}
+        //- section.primary-content
         block content
-      nav.secondary-content
-        each navItem in tableOfContents
-          a(href=`#${navItem.id}`) #{navItem.text}

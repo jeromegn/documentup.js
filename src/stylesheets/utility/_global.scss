@@ -94,7 +94,7 @@ $base-font: -apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Segoe UI'
 $mono-font: 'Roboto Mono', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
 
 // Vertical rhythm defaults
-$base-size: 16px;
+$base-size: 17px;
 $base-line-height: 1.6;
 
 // Smooth fonts are smooth
@@ -108,13 +108,15 @@ $base-line-height: 1.6;
   }
 }
 
+//   1: 32px,
+
 $headings: (
-  1: 32px,
-  2: 29px,
-  3: 26px,
-  4: 23px,
-  5: 20px,
-  6: 18px
+  1: 29px,
+  2: 26px,
+  3: 23px,
+  4: 20px,
+  5: 18px,
+  6: 16px
 );
 
 // 1.125 modular scale - http://www.modularscale.com/?16&px&1.125&web&text

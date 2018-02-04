@@ -8,16 +8,14 @@
 
 $view-width: 1590px;
 $view-padding: 45px;
-$secondary-width: 215px;
+$secondary-width: 30%;
 $tertiary-width: 370px;
 
 /* ==================================== *
  * App container
  * ------------------------------------ */
 
-.app,
-.refresh {
-  background: $white-3;
+.app {
   overflow-x: hidden;
 
   h1,
@@ -196,41 +194,41 @@ $tertiary-width: 370px;
 }
 
 // Inner header navigation
-.inner-nav {
-  display: flex;
-  position: relative;
+// .inner-nav {
+//   display: flex;
+//   position: relative;
 
-  > a {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-    font-weight: 500;
-    font-size: 13px;
-    padding: 6px 12px;
-    border-radius: 20px;
-    transition: background $duration;
+//   > a {
+//     display: flex;
+//     align-items: center;
+//     white-space: nowrap;
+//     font-weight: 500;
+//     font-size: 13px;
+//     padding: 6px 12px;
+//     border-radius: 20px;
+//     transition: background $duration;
 
-    &:not(:last-child) {
-      margin-right: 3px;
-    }
+//     &:not(:last-child) {
+//       margin-right: 3px;
+//     }
 
-    @include normal {
-      background: transparent;
-    }
+//     @include normal {
+//       background: transparent;
+//     }
 
-    @include active {
-      background: rgba($black-3, .2);
-    }
-  }
+//     @include active {
+//       background: rgba($black-3, .2);
+//     }
+//   }
 
-  .icon {
-    vertical-align: middle;
-  }
+//   .icon {
+//     vertical-align: middle;
+//   }
 
-  a .icon {
-    margin-right: 6px;
-  }
-}
+//   a .icon {
+//     margin-right: 6px;
+//   }
+// }
 
 /* ==================================== *
  * View content
@@ -241,13 +239,13 @@ $tertiary-width: 370px;
   margin-bottom: $vertical-margin;
 }
 
-// Section headings
-.section-heading  {
-  font-size: 17px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  letter-spacing: -.005em;
-}
+// // Section headings
+// .section-heading  {
+//   font-size: 17px;
+//   font-weight: 600;
+//   margin-bottom: 8px;
+//   letter-spacing: -.005em;
+// }
 
 .view-content {
   flex: 1;
@@ -270,12 +268,17 @@ $tertiary-width: 370px;
   padding: $view-padding;
 
   .secondary-content + & {
-    max-width: calc(100vw - #{$secondary-width});
+    // max-width: calc(100vw - #{$secondary-width});
+    max-width: 61.8%;
   }
 }
 
 .secondary-content {
   order: 1;
+  background: $white-3;
+  box-shadow:
+    -10px 0 25px rgba($blue-5, .025) inset,
+     -2px 0 4px rgba($blue-5, .075) inset;
   padding: $view-padding 0 $view-padding $view-padding - 12px;
 }
 
@@ -289,18 +292,18 @@ $tertiary-width: 370px;
     flex: 1;
 
     .tertiary-content + & {
-      max-width: calc(100% - #{$secondary-width + $tertiary-width});
+      // max-width: calc(100% - #{$secondary-width + $tertiary-width});
     }
   }
 
   .secondary-content {
     flex: 0 1 $secondary-width;
-    box-shadow: -1px 0 $gray-1 inset;
+    // box-shadow: -1px 0 $gray-1 inset;
   }
 
   .tertiary-content {
     flex: 0 1 $tertiary-width;
-    box-shadow: 1px 0 $gray-1 inset;
+    // box-shadow: 1px 0 $gray-1 inset;
   }
 }
 
@@ -407,3 +410,153 @@ $tertiary-width: 370px;
     stroke-width: 1.25;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+///////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+/* ========================================================================== *
+ * Annotated code view module
+ * -------------------------------------------------------------------------- */
+
+@mixin fluid-padding {
+  padding-left: 50px;
+  padding-right: 50px;
+
+  @include at-least(1000px) {
+    padding-left: calc(20px + 2vw);
+    padding-right: calc(20px + 2vw);
+  }
+}
+
+$sidebar-width: 38.2%;
+$document-width: 100% - $sidebar-width;
+$fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 100)';
+
+// .view-content {
+//   @include padded-module(1600px);
+
+//   pre,
+//   code {
+//     background: $white-1;
+//     box-shadow: none;
+//   }
+
+//   pre {
+//     padding: 20px;
+//   }
+
+//   @include until(1000px) {
+//     background: mix($white-2, $white-3);
+//     padding-left: 30px;
+//     padding-right: 30px;
+//   }
+
+//   @include at-least(1000px) {
+//     display: flex;
+//     flex-flow: row wrap;
+//     // align-items: baseline;
+//   }
+
+  // @include between(1000px, 1600px) {
+  //   background:
+  //     linear-gradient(
+  //       to right,
+  //       transparent,
+  //       rgba($blue-5, .025),
+  //       rgba($blue-5, .075)
+  //     ) calc(100vw * (#{strip-unit($sidebar-width)} / 100) - 15px) 0 / 15px 1px repeat-y,
+  //     linear-gradient(
+  //       to right,
+  //       mix($white-2, $white-3) $sidebar-width,
+  //       $white-1 $sidebar-width
+  //     ),
+  //     mix($white-2, $white-3);
+  // }
+
+  // @include at-least(1600px) {
+  //   background:
+  //     linear-gradient(
+  //       to right,
+  //       transparent,
+  //       rgba($blue-5, .025),
+  //       rgba($blue-5, .075)
+  //     ) calc(#{$fluid-sidebar-width} - 15px) 0 / 15px 1px repeat-y,
+  //     linear-gradient(
+  //       to right,
+  //       mix($white-2, $white-3) calc(#{$fluid-sidebar-width}),
+  //       $white-1 calc(#{$fluid-sidebar-width})
+  //     ),
+  //     mix($white-2, $white-3);
+  // }
+// }
+
+// .secondary-content {
+//   background: $white-3;
+//   // min-height: 100vh;
+//   @include at-least(1000px) {
+//     flex: 0 1 #{$sidebar-width};
+//     @include fluid-padding;
+
+//     &:first-child {
+//       padding-top: 40px;
+//     }
+
+//     // Headings
+//     @for $i from 1 through length($headings) {
+//       h#{$i} {
+//         font-size: map-get($headings, $i) * .8;
+//         margin-bottom: 16px;
+//       }
+//     }
+
+//     pre {
+//       font-size: 14px;
+//       padding: 15px 20px;
+//     }
+//   }
+// }
+
+// .primary-content {
+//   background: $white-1;
+//   box-shadow:
+//     -10px 0 25px rgba($blue-5, .025),
+//      -2px 0 4px rgba($blue-5, .075);
+
+//   @include at-least(1000px) {
+//     flex: 0 1 #{$document-width};
+//     padding-bottom: #{$base-line-height}em;
+//     // margin: 0;
+//     @include fluid-padding;
+
+//     &:first-of-type {
+//       padding-top: 50px;
+//     }
+
+//     pre,
+//     code {
+//       margin: 0;
+//       padding: 0;
+//       background: transparent;
+//     }
+//   }
+// }
