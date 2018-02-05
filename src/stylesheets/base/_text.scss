@@ -7,7 +7,7 @@
  * ------------------------------------- */
 
 // Inline links
-@mixin inline-link($color: $blue-2) {
+@mixin inline-link($color: $green-3) {
   text-decoration: underline;
   text-decoration-color: rgba($color, .4);
   transition: $duration;
@@ -23,17 +23,6 @@
     color: $color;
     text-decoration-color: $color;
   }
-}
-
-// Pills
-@mixin pill {
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 20px;
-  background: $black-1;
-  color: $white-1;
 }
 
 /* ===================================== *
@@ -55,15 +44,6 @@ textarea {
  * Heading
  * ------------------------------------- */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 600;
-}
-
 @for $i from 1 through length($headings) {
   h#{$i} {
     font-size: map-get($headings, $i);
@@ -81,58 +61,20 @@ h6 {
 
 // Blockquotes
 blockquote {
-  font-size: 28px;
   color: $gray-3;
-  line-height: 45px;
-  border-top: 14px solid transparent;
-  margin-bottom: 31px;
-  padding-left: 30px;
-
-  p {
-    padding-top: 0;
-    margin-bottom: 0;
-
-    &:first-of-type {
-      text-indent: -.325em;
-    }
-
-    &:first-of-type:before {
-      content: '“';
-    }
-
-    &:last-of-type:after {
-      content: '”';
-    }
-  }
-
-  p + p {
-    padding-top: 30px;
-  }
+  font-size: 1.275em;
+  padding-left: 1.275em;
+  border-left: 4px solid $green-3;
 
   cite {
-    display: block;
-    font-size: 16px;
     font-style: normal;
-    padding-top: 26px;
-    padding-bottom: 4px;
-    line-height: 30px;
     font-weight: 700;
-
-    a {
-      // @include inline-link($capecod, $cerulean);
-    }
   }
 }
 
 /* ===================================== *
  * Inline
  * ------------------------------------- */
-
-// Bold text
-b,
-strong {
-  font-weight: 700;
-}
 
 // Subscripts & superscripts
 sub,
@@ -242,9 +184,9 @@ samp {
 
 pre {
   overflow: auto;
-  padding: 2px 6px;
+  padding: 1.275em;
   border-radius: $radius;
-  background: $white-1;
+  background: $white-3;
   word-wrap: break-word;
   white-space: pre-wrap;
 }

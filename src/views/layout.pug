@@ -21,11 +21,9 @@ html
   body.app
 
     //- Main content
-    main(role="main")
-      section.view-content
-        nav.secondary-content
-          a(href="#" id="logo")= repository.displayName()
-          each navItem in tableOfContents
-            a(href=`#${navItem.id}`) #{navItem.text}
-        //- section.primary-content
-        block content
+    main.view-content(role="main")
+      nav.secondary-content
+        a(href="#" id="logo")= repository.displayName()
+        each navItem in tableOfContents
+          a(href=`#${navItem.id}`) #{navItem.text}
+      block content
