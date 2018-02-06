@@ -1,4 +1,4 @@
-![DocumentUp](src/images/logo.png)
+![DocumentUp](src/images/logo.svg)
 
 **This site has been generated with DocumentUp** (eat your own [dog food](src/index.js), people)
 
