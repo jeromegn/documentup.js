@@ -1,34 +1,9 @@
 /* ========================================================================== *
- * d. Media module
+ * Media module
  * -------------------------------------------------------------------------- */
 
 /* ===================================== *
- * i. Utility
- * ------------------------------------- */
-
-// Fluid Embeds
-@mixin embed {
-  width: 100%;
-  // height: calc(9 / 16 * #{$content-width});
-
-  // @media (max-width: $content-width + $content-padding * 2) {
-  //   height: calc(9 / 16 * 100vw - #{$content-padding});
-  // }
-}
-
-// Image caption mixin
-@mixin figcaption {
-  font-size: 14px;
-  color: $gray-3;
-}
-
-// Extendable image caption placeholder
-%figcaption {
-  @include figcaption;
-}
-
-/* ===================================== *
- * ii. Common
+ * Common
  * ------------------------------------- */
 
 // Media
@@ -39,7 +14,7 @@ video {
   vertical-align: top;
 }
 
-img[src$="centerme"] {
-  display:block;
+img[src$="centered"] {
+  display: block;
   margin: 0 auto;
 }

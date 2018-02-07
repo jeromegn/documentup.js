@@ -1,5 +1,5 @@
 /*
-* Set up routes for HTTP requests. We're using the 
+* Set up routes for HTTP requests. We're using the
 * [npm routes](https://github.com/aaronblohowiak/routes.js) module, which is
 * bundled into the app with webpack.
 */
@@ -7,7 +7,7 @@
 const router = require('routes')()
 
 /*
-* In search of a pretty site, use webpack to load CSS from 
+* In search of a pretty site, use webpack to load CSS from
 * [index.css](/src/stylesheets/index.css) into a string constant.
 * Then add a route to serve CSS from `/screen.css`
 */
@@ -40,7 +40,7 @@ async function renderRepo(login, repoName) {
     let result = renderer.render(raw)
     return pageTpl({ html: result.body, tableOfContents: result.tableOfContents, repository: repo })
   }
- 
+
   return tryCache(login + "/" + repoName, renderFn)
 }
 

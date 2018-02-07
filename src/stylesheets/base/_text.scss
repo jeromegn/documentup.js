@@ -201,7 +201,9 @@ pre > samp {
 :not(pre) > kbd,
 :not(pre) > samp {
   line-height: 0;
+  overflow-wrap: break-word;
   word-wrap: break-word;
+  word-break: break-all;
   white-space: pre-wrap;
   border-radius: $radius;
   padding: 0 4px;

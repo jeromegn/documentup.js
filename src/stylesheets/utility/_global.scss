@@ -148,22 +148,11 @@ $duration: .2s;
 // Block-level elements that get vertical margin
 $block-elements: p, ul, ol, h1, h2, h3, h4, h5, h6, pre, table, label, blockquote, hr, '.card', ':not(label) > input, :not(label) > select, :not(label) > textarea', '.inline-notification', '.input-group', '.toggle-group';
 
-// Responsive variables
-$large-breakpoint: 900px;
-$small-breakpoint: 800px;
-
 // Border radius
 $radius: 3px;
 
-// Card padding
-$card-padding: 20px;
-$large-card-padding: 26px;
-
 // Vertical margin
-$vertical-margin: 24px;
-
-// Inner content padding
-$content-padding: 32px;
+$vertical-margin: $base-size * $base-line-height;
 
 // Main header height
 $header-height: 65px;
