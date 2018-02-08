@@ -30,7 +30,7 @@ $fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 
   }
 
   @include until(1000px) {
-    background: mix($white-2, $white-3);
+    background: $white-2;
     padding-left: 30px;
     padding-right: 30px;
   }
@@ -51,10 +51,10 @@ $fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 
       ) calc(100vw * (#{strip-unit($sidebar-width)} / 100) - 15px) 0 / 15px 1px repeat-y,
       linear-gradient(
         to right,
-        mix($white-2, $white-3) $sidebar-width,
+        $white-2 $sidebar-width,
         $white-1 $sidebar-width
       ),
-      mix($white-2, $white-3);
+      $white-2;
   }
 
   @include at-least(1600px) {
@@ -67,10 +67,10 @@ $fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 
       ) calc(#{$fluid-sidebar-width} - 15px) 0 / 15px 1px repeat-y,
       linear-gradient(
         to right,
-        mix($white-2, $white-3) calc(#{$fluid-sidebar-width}),
+        $white-2 calc(#{$fluid-sidebar-width}),
         $white-1 calc(#{$fluid-sidebar-width})
       ),
-      mix($white-2, $white-3);
+      $white-2;
   }
 }
 

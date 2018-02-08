@@ -7,7 +7,7 @@
  * ------------------------------------- */
 
 // Inline links
-@mixin inline-link($color: $green-3) {
+@mixin inline-link($color: $blue-3) {
   text-decoration: underline;
   text-decoration-color: rgba($color, .4);
   transition: $duration;
@@ -48,6 +48,16 @@ textarea {
   h#{$i} {
     font-size: map-get($headings, $i);
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: .005em;
 }
 
 /* ===================================== *
@@ -174,6 +184,7 @@ code,
 kbd,
 samp {
   font-family: $mono-font;
+  font-size: $base-size - 1px;
   direction: ltr;
   text-align: left;
   tab-size: 2;
@@ -186,29 +197,22 @@ pre {
   overflow: auto;
   padding: 1.275em;
   border-radius: $radius;
-  background: $white-3;
+  background: $white-2;
   word-wrap: break-word;
   white-space: pre-wrap;
-}
-
-pre > code,
-pre > kbd,
-pre > samp {
-  font-size: 1em;
 }
 
 :not(pre) > code,
 :not(pre) > kbd,
 :not(pre) > samp {
-  line-height: 0;
+  line-height: 1;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;
   border-radius: $radius;
-  padding: 0 4px;
+  padding: 0 4px 1px;
   background: $white-2;
-  box-shadow: 0 0 0 1px $gray-1 inset;
 }
 
 /* ===================================== *

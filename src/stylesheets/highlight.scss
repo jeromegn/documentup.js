@@ -1,47 +1,120 @@
-// // Light theme
-// .hljs-built_in,
-// .hljs-selector-tag,
-// .hljs-section,
-// .hljs-link {
-//   color: #8be9fd;
-// }
+.token.keyword {
+  color: $violet-5;
+}
 
-// .hljs-keyword {
-//   color: #1B9AF7;
-// }
+.token.atrule,
+.token.attr-value {
+  color: $green-3;
+}
 
-// .hljs,
-// .hljs-subst {
-//   color: #3B3B54;
-// }
+.token.cdata,
+.token.comment,
+.token.doctype,
+.token.prolog {
+  color: $gray-2;
+}
 
-// .hljs-title,
-// .hljs-params {
-//   color: #ED4694;
-// }
+.token.attr-name,
+.token.builtin,
+.token.function,
+.token.selector,
+.token.string {
+  color: $turquoise-5;
+}
 
-// .hljs-string,
-// .hljs-meta,
-// .hljs-name,
-// .hljs-type,
-// .hljs-attr,
-// .hljs-symbol,
-// .hljs-bullet,
-// .hljs-addition,
-// .hljs-variable,
-// .hljs-regexp,
-// .hljs-template-tag,
-// .hljs-template-variable {
-//   color: #FC880F;
-// }
+.token.constant,
+.token.important,
+.token.property,
+.token.regex,
+.token.symbol,
+.token.tag {
+  color: $red-2;
+}
 
-// .hljs-comment,
-// .hljs-quote,
-// .hljs-deletion {
-//   color: #888;
-// }
+.token.boolean,
+.token.entity,
+.token.number,
+.token.operator,
+.token.punctuation,
+.token.url,
+.token.variable {
+  color: $blue-2;
+}
 
-// .hljs-literal,
-// .hljs-number {
-//   color: #8BD300;
-// }
+.token.important {
+  font-weight: 700
+}
+
+.token.entity {
+  cursor: help
+}
+
+.namespace {
+  opacity: .7
+}
+
+.language-css,
+.language-css .token.boolean,
+.language-css .token.function,
+.language-css .token.number,
+.language-css .token.string,
+.language-css .token.variable,
+.language-scss,
+.language-scss .token.boolean,
+.language-scss .token.function,
+.language-scss .token.number,
+.language-scss .token.string,
+.language-scss .token.variable {
+  color: $green-3;
+}
+
+.language-bash {
+  color: $turquoise-5;
+}
+
+.language-bash .token.function,
+.language-bash .token.variable {
+  color: $green-3;
+}
+
+.language-markup .token.atrule,
+.language-markup .token.attr-value {
+  color: $red-2;
+}
+
+.language-javascript,
+.language-markup .token.constant,
+.language-markup .token.property,
+.language-markup .token.symbol,
+.language-markup .token.tag {
+  color: $turquoise-5;
+}
+
+.language-javascript .token.function {
+  color: #4b5562
+}
+
+.language-javascript .token.number {
+  color: $red-2;
+}
+
+.language-javascript .token.string {
+  color: $green-3;
+}
+
+.language-ruby {
+  color: $turquoise-5;
+}
+
+.language-ruby .token.function,
+.language-ruby .token.number {
+  color: $red-2;
+}
+
+.language-ruby .token.constant {
+  color: #4b5562
+}
+
+.language-ruby .token.string {
+  color: $green-3;
+}

@@ -18,7 +18,8 @@ html
     //- Stylesheets
     link(rel="stylesheet" type="text/css" href="/screen.css" media="all")
 
-    script(async="" src="src/javascripts/prism.js")
+    script
+      include includes/prism.js
 
   body.app
 
@@ -27,5 +28,5 @@ html
       nav.secondary-content
         a(href="#" id="logo")= repository.displayName()
         each navItem in tableOfContents
-          a(href=`#${navItem.id}`) #{navItem.text}
+          a(href=`#${navItem.id}` class=`h${navItem.level}`) #{navItem.text}
       block content

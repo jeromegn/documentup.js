@@ -35,6 +35,10 @@ $tertiary-width: 370px;
     flex-flow: row wrap;
     align-items: center;
     white-space: pre-wrap;
+
+    &:not(:first-child) {
+      padding-top: $vertical-margin;
+    }
   }
 }
 
@@ -54,24 +58,36 @@ $tertiary-width: 370px;
   flex-direction: row;
   width: 100vw;
   justify-content: center;
-  background: mix($white-2, $white-3) linear-gradient(to right, mix($white-2, $white-3)  50%, $white-1 50%);
+  background: $white-2 linear-gradient(to right, $white-2  50%, $white-1 50%);
 }
 
 .primary-content {
   flex: 1;
   padding: $view-padding;
-  max-width: calc(90px + 8vw + 75ch);
   background: $white-1;
-  padding: 90px calc(45px + 4vw);
+  padding: 90px;
+  max-width: calc(180px + 47.235em);
+  max-width: calc(180px + 75ch);
   box-shadow:
     35px 0 $white-1,
-    -5px 0 35px rgba($blue-5, .15),
-    -5px 0 15px rgba($blue-5,.075);
+   -10px 0 35px rgba($blue-5, .075),
+       0 0 10px rgba($blue-5, .1);
+
+  @include until(1500px) {
+    padding: calc(45px + 4vw);
+    max-width: calc(90px + 8vw + 47.235em);
+    max-width: calc(90px + 8vw + 75ch);
+  }
 }
 
 .secondary-content {
   flex: 0 1 auto;
-  padding: $view-padding 0 $view-padding $view-padding - 12px;
+  font-size: $base-size - 2px;
+  padding: 90px 45px;
+
+  @include until(1500px) {
+    padding: calc(45px + 4vw) calc(22.5px + 2vw);
+  }
 }
 
 .wide {
@@ -108,21 +124,7 @@ $tertiary-width: 370px;
     white-space: nowrap;
     text-decoration: none;
     transition: color $duration;
-    padding: 6px $view-padding 6px 12px;
-    border-radius: 20px 0 0 20px;
-    background: transparent;
-    margin-top: -2px;
-
-    &:first-child {
-      margin-top: 0;
-    }
-
-    .icon {
-      color: $gray-3;
-      margin-right: 8px;
-      vertical-align: middle;
-      transition: color $duration;
-    }
+    line-height: 1.75;
 
     @include normal {
       color: inherit;
@@ -133,15 +135,7 @@ $tertiary-width: 370px;
     &:focus,
     &:active,
     &.current {
-      color: $blue-2;
-
-      .icon {
-        color: $blue-2;
-      }
-    }
-
-    &.current {
-      background: rgba($blue-2, .25);
+      color: $blue-3;
     }
   }
 }
@@ -156,160 +150,19 @@ $tertiary-width: 370px;
   }
 }
 
+a.h1,
+a.h2 {
+  font-size: 1.1em;
+  font-weight: 700;
 
-
-
-
-
-
-
-
-
-
-///////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-/* ========================================================================== *
- * Annotated code view module
- * -------------------------------------------------------------------------- */
-
-@mixin fluid-padding {
-  padding-left: 50px;
-  padding-right: 50px;
-
-  @include at-least(1000px) {
-    padding-left: calc(20px + 2vw);
-    padding-right: calc(20px + 2vw);
+  &:not(:first-child) {
+    padding-top: .75em;
   }
 }
 
-$sidebar-width: 38.2%;
-$document-width: 100% - $sidebar-width;
-$fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 100)';
-
-// .view-content {
-//   @include padded-module(1600px);
-
-//   pre,
-//   code {
-//     background: $white-1;
-//     box-shadow: none;
-//   }
-
-//   pre {
-//     padding: 20px;
-//   }
-
-//   @include until(1000px) {
-//     background: mix($white-2, $white-3);
-//     padding-left: 30px;
-//     padding-right: 30px;
-//   }
-
-//   @include at-least(1000px) {
-//     display: flex;
-//     flex-flow: row wrap;
-//     // align-items: baseline;
-//   }
-
-  // @include between(1000px, 1600px) {
-  //   background:
-  //     linear-gradient(
-  //       to right,
-  //       transparent,
-  //       rgba($blue-5, .025),
-  //       rgba($blue-5, .075)
-  //     ) calc(100vw * (#{strip-unit($sidebar-width)} / 100) - 15px) 0 / 15px 1px repeat-y,
-  //     linear-gradient(
-  //       to right,
-  //       mix($white-2, $white-3) $sidebar-width,
-  //       $white-1 $sidebar-width
-  //     ),
-  //     mix($white-2, $white-3);
-  // }
-
-  // @include at-least(1600px) {
-  //   background:
-  //     linear-gradient(
-  //       to right,
-  //       transparent,
-  //       rgba($blue-5, .025),
-  //       rgba($blue-5, .075)
-  //     ) calc(#{$fluid-sidebar-width} - 15px) 0 / 15px 1px repeat-y,
-  //     linear-gradient(
-  //       to right,
-  //       mix($white-2, $white-3) calc(#{$fluid-sidebar-width}),
-  //       $white-1 calc(#{$fluid-sidebar-width})
-  //     ),
-  //     mix($white-2, $white-3);
-  // }
-// }
-
-// .secondary-content {
-//   background: $white-3;
-//   // min-height: 100vh;
-//   @include at-least(1000px) {
-//     flex: 0 1 #{$sidebar-width};
-//     @include fluid-padding;
-
-//     &:first-child {
-//       padding-top: 40px;
-//     }
-
-//     // Headings
-//     @for $i from 1 through length($headings) {
-//       h#{$i} {
-//         font-size: map-get($headings, $i) * .8;
-//         margin-bottom: 16px;
-//       }
-//     }
-
-//     pre {
-//       font-size: 14px;
-//       padding: 15px 20px;
-//     }
-//   }
-// }
-
-// .primary-content {
-//   background: $white-1;
-//   box-shadow:
-//     -10px 0 25px rgba($blue-5, .025),
-//      -2px 0 4px rgba($blue-5, .075);
-
-//   @include at-least(1000px) {
-//     flex: 0 1 #{$document-width};
-//     padding-bottom: #{$base-line-height}em;
-//     // margin: 0;
-//     @include fluid-padding;
-
-//     &:first-of-type {
-//       padding-top: 50px;
-//     }
-
-//     pre,
-//     code {
-//       margin: 0;
-//       padding: 0;
-//       background: transparent;
-//     }
-//   }
-// }
-
-// .primary-content {
-//   font-size: 18px;
-//   width: 47.25em;
-//   width: 75ch;
-//   max-width: 100%;
-//   margin: 1.5em auto;
-// }
+a.h3,
+a.h4,
+a.h5,
+a.h6 {
+  text-indent: .75em;
+}

@@ -54,15 +54,23 @@ $violet-1:    #FF9BF2; // Lavender rose
 $violet-2:    #CD4BE3; // Medium orchid
 $violet-3:    #A525D8; // Dark orchid
 
-$blue-1:      #CBE2FF; // Hawkes blue
-$blue-2:      #65A8FF; // Jordy blue
-$blue-3:      #5381FF; // Cornflower blue
-$blue-4:      #4F65FF; // Neon blue
-$blue-5:      #475EAA; // Mariner
+$violet-1:    #DBA6FA; // Mauve
+$violet-2:    #D18DF9; // Heliotrope
+$violet-3:    #C774F7; // Deep lilac
+$violet-4:    #AE4CEF; // Medium orchid
+$violet-5:    #8836C8; // Dark orchid
 
-$turquoise-1: #61D8FF; // Turquoise
-$turquoise-2: #34B4FF; // Summer sky
-$turquoise-3: #0080D8; // Navy blue
+$blue-1:      #CBE2FF; // Hawkes blue
+$blue-2:      #98C5ff; // Light sky blue
+$blue-3:      #65A8FF; // Jordy blue
+$blue-4:      #5381FF; // Cornflower blue
+$blue-5:      #4960bf; // Free speech blue
+
+$turquoise-1: #9AE6FF; // Columbia blue
+$turquoise-2: #61D8FF; // Turquoise
+$turquoise-3: #34B4FF; // Summer sky
+$turquoise-4: #1A9AEC; // Dodger blue
+$turquoise-5: #0080D8; // Navy blue
 
 $yellow-1:    #FFDA4C; // Mustard
 $yellow-2:    #FFCA16; // Turbo
@@ -74,7 +82,7 @@ $pink-2:      #FF4D75; // Wild watermelon
 $pink-3:      #FF2A49; // Radical red
 
 $white-1:     #FFFFFF; // White
-$white-2:     #F6F9FC; // Alice blue
+$white-2:     #F4F7Fb; // Alice blue
 $white-3:     #EBF1F8; // Solitude
 
 $gray-1:      #D9DCE7; // Mischka
@@ -93,9 +101,9 @@ $black-3:     #3B3B54; // Paynes gray
 $base-font: -apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 $mono-font: 'Roboto Mono', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
 
-// Vertical rhythm defaults
+// Default font size & line spacing
 $base-size: 17px;
-$base-line-height: 1.6;
+$base-line-height: 1.47059;
 
 // Smooth fonts are smooth
 @mixin font-smoothing($value: on) {
@@ -108,21 +116,15 @@ $base-line-height: 1.6;
   }
 }
 
-//   1: 32px,
-
+// 1.125 modular scale - http://www.modularscale.com/?18&px&1.125&web&text
 $headings: (
-  1: 29px,
-  2: 26px,
-  3: 23px,
-  4: 20px,
-  5: 18px,
-  6: 16px
+  1: $base-size * 1.802,
+  2: $base-size * 1.602,
+  3: $base-size * 1.424,
+  4: $base-size * 1.266,
+  5: $base-size * 1.125,
+  6: $base-size
 );
-
-// 1.125 modular scale - http://www.modularscale.com/?16&px&1.125&web&text
-@function heading($size: 1, $scale: 1) {
-  @return map-get($headings, $size) * $scale;
-}
 
 /* ===================================== *
  * Animations
@@ -152,7 +154,7 @@ $block-elements: p, ul, ol, h1, h2, h3, h4, h5, h6, pre, table, label, blockquot
 $radius: 3px;
 
 // Vertical margin
-$vertical-margin: $base-size * $base-line-height;
+$vertical-margin: $base-size * 1.2;
 
 // Main header height
 $header-height: 65px;
@@ -288,7 +290,7 @@ $breakpoint: 800px;
 }
 
 // Whiten svg graphics mixin
-@mixin whiten($background: $blue-2, $foreground: $white-1) {
+@mixin whiten($background: $blue-3, $foreground: $white-1) {
   .light {
     fill: $foreground;
   }
