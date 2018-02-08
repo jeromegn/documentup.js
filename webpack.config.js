@@ -9,10 +9,10 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.css$/,
-      //   use: ['to-string-loader', 'css-loader', 'postcss-loader']
-      // },
+      {
+        test: /\.css$/,
+        use: ['to-string-loader', 'css-loader', 'postcss-loader']
+      },
       {
         test: /\.scss$/,
         use: ['to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader']

@@ -3,15 +3,6 @@
  * -------------------------------------------------------------------------- */
 
 /* ==================================== *
- * Utilities
- * ------------------------------------ */
-
-$view-width: 1590px;
-$view-padding: 45px;
-$secondary-width: 30%;
-$tertiary-width: 370px;
-
-/* ==================================== *
  * App container
  * ------------------------------------ */
 
@@ -63,7 +54,6 @@ $tertiary-width: 370px;
 
 .primary-content {
   flex: 1;
-  padding: $view-padding;
   background: $white-1;
   padding: 90px;
   max-width: calc(180px + 47.235em);
@@ -77,16 +67,6 @@ $tertiary-width: 370px;
     padding: calc(45px + 4vw);
     max-width: calc(90px + 8vw + 47.235em);
     max-width: calc(90px + 8vw + 75ch);
-  }
-}
-
-.secondary-content {
-  flex: 0 1 auto;
-  font-size: $base-size - 2px;
-  padding: 90px 45px;
-
-  @include until(1500px) {
-    padding: calc(45px + 4vw) calc(22.5px + 2vw);
   }
 }
 
@@ -117,6 +97,13 @@ $tertiary-width: 370px;
  * ------------------------------------ */
 
 .secondary-content {
+  flex: 0 1 auto;
+  padding: 90px 45px;
+
+  @include until(1500px) {
+    padding: calc(45px + 4vw) calc(22.5px + 2vw);
+  }
+
   a {
     display: flex;
     align-items: center;
@@ -140,20 +127,10 @@ $tertiary-width: 370px;
   }
 }
 
-// Right-hand secondary sidebar
-.tertiary-content {
-  font-size: 12px;
-  @include collapse-bottom;
-
-  #{$block-elements} {
-    margin-bottom: 12px;
-  }
-}
-
 a.h1,
 a.h2 {
-  font-size: 1.1em;
   font-weight: 700;
+  font-size: $base-size - 1px;
 
   &:not(:first-child) {
     padding-top: .75em;
@@ -164,5 +141,13 @@ a.h3,
 a.h4,
 a.h5,
 a.h6 {
+  font-size: $base-size - 3px;
   text-indent: .75em;
+}
+
+nav.secondary-content {
+  // position: sticky;
+  // top: -50px;
+  max-height: 100%;
+  overflow-y: auto;
 }

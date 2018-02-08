@@ -15,6 +15,14 @@ const css = require('./stylesheets/index.scss').toString()
 router.addRoute("/screen.css", function (event, match) {
   return new Response(css, { headers: { 'content-type': 'text/css' } })
 })
+const woff2 = require('./stylesheets/fonts-woff2.css').toString()
+router.addRoute("/fonts-woff2.css", function (event, match) {
+  return new Response(woff2, { headers: { 'content-type': 'text/css' } })
+})
+const woff = require('./stylesheets/fonts-woff.css').toString()
+router.addRoute("/fonts-woff.css", function (event, match) {
+  return new Response(woff, { headers: { 'content-type': 'text/css' } })
+})
 router.addRoute("/:login/:repo", async function (event, match) {
   return await renderRepo(match.params.login, match.params.repo)
 })
