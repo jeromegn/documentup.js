@@ -18,6 +18,10 @@ html
     //- Stylesheets
     link(rel="stylesheet" type="text/css" href="/screen.css" media="all")
 
+    //- Font-loading JS
+    script
+      include includes/fonts.js
+
   body
 
     //- Main content
@@ -42,4 +46,4 @@ html
                 code(class=language)
                   - syntax = Prism.languages[language]
                   != (syntax && Prism.highlight(code, syntax)) || code
-          - commentsList = nextList
+            - commentsList = nextList
