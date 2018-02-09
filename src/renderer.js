@@ -1,12 +1,6 @@
 const marked = require('marked')
 const prismjs = require('prismjs')
 
-marked.setOptions({
-  highlight: function (code, lang) {
-    return Prism.highlight(code, Prism.languages[lang || 'html'])
-  }
-})
-
 module.exports = class Renderer {
   constructor(login, repo) {
     this.tableOfContents = []
@@ -28,7 +22,18 @@ module.exports = class Renderer {
   }
 
   render(markdown) {
-    const body = marked(markdown, { renderer: this.renderer, baseUrl: this.baseUrl })
+    const body = marked(markdown, {
+      langPrefix: 'language-',
+      renderer: this.renderer,
+      baseUrl: this.baseUrl,
+      highlight: function (code, lang) {
+        const language = !lang || lang === 'html' ? 'markup' : lang;
+        if (!Prism.languages[language]) {
+          require('prismjs/components/prism-' + language + '.js');
+        }
+        return Prism.highlight(code, Prism.languages[language]);
+      }
+    })
     return {
       tableOfContents: this.tableOfContents,
       body: body

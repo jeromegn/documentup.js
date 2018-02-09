@@ -53,12 +53,12 @@
   opacity: .7
 }
 
-.css,
-.css .token.boolean,
-.css .token.function,
-.css .token.number,
-.css .token.string,
-.css .token.variable,
+.language-css,
+.language-css .token.boolean,
+.language-css .token.function,
+.language-css .token.number,
+.language-css .token.string,
+.language-css .token.variable,
 .scss,
 .scss .token.boolean,
 .scss .token.function,
@@ -68,57 +68,57 @@
   color: $green-3;
 }
 
-.bash {
+.language-bash {
   color: $turquoise-5;
 }
 
-.bash .token.function,
-.bash .token.variable {
+.language-bash .token.function,
+.language-bash .token.variable {
   color: $green-3;
 }
 
-.markup .token.atrule,
-.markup .token.attr-value {
+.language-markup .token.atrule,
+.language-markup .token.attr-value {
   color: $red-2;
 }
 
-.javascript,
-.markup .token.constant,
-.markup .token.property,
-.markup .token.symbol,
-.markup .token.tag {
+.language-javascript,
+.language-markup .token.constant,
+.language-markup .token.property,
+.language-markup .token.symbol,
+.language-markup .token.tag {
   color: $turquoise-5;
 }
 
-.javascript .token.function {
+.language-javascript .token.function {
   color: $black-2;
 }
 
-.javascript .token.number {
+.language-javascript .token.number {
   color: $violet-5;
 }
 
-.javascript .token.keyword {
+.language-javascript .token.keyword {
   color: $red-2;
 }
 
-.javascript .token.string {
+.language-javascript .token.string {
   color: $green-3;
 }
 
-.ruby {
+.language-ruby {
   color: $turquoise-5;
 }
 
-.ruby .token.function,
-.ruby .token.number {
+.language-ruby .token.function,
+.language-ruby .token.number {
   color: $red-2;
 }
 
-.ruby .token.constant {
+.language-ruby .token.constant {
   color: $black-2;
 }
 
-.ruby .token.string {
+.language-ruby .token.string {
   color: $green-3;
 }
