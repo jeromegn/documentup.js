@@ -27,11 +27,10 @@ module.exports = class Renderer {
       renderer: this.renderer,
       baseUrl: this.baseUrl,
       highlight: function (code, lang) {
-        const language = !lang || lang === 'html' ? 'markup' : lang;
-        if (!Prism.languages[language]) {
-          require('prismjs/components/prism-' + language + '.js');
-        }
-        return Prism.highlight(code, Prism.languages[language]);
+        const language = !lang || lang === 'html' ? 'markup' : lang === 'yml' ? 'yaml' : lang
+        if (!Prism.languages[language])
+          require('prismjs/components/prism-' + language + '.js')
+        return Prism.highlight(code, Prism.languages[language])
       }
     })
     return {

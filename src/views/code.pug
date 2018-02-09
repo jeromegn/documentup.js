@@ -43,7 +43,7 @@ html
               else
                 - code = source.slice(current.codeStart).join("\n")
               pre
-                code(class=language)
+                code(class=`language-${language}`)
                   - syntax = Prism.languages[language]
                   != (syntax && Prism.highlight(code, syntax)) || code
             - commentsList = nextList
