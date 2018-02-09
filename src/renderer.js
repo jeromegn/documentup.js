@@ -1,6 +1,12 @@
 const marked = require('marked')
 const prismjs = require('prismjs')
 
+marked.setOptions({
+  highlight: function (code, lang) {
+    return Prism.highlight(code, Prism.languages[lang || 'html'])
+  }
+})
+
 module.exports = class Renderer {
   constructor(login, repo) {
     this.tableOfContents = []

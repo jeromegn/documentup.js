@@ -111,7 +111,8 @@
     white-space: nowrap;
     text-decoration: none;
     transition: color $duration;
-    line-height: 1.75;
+    line-height: 1;
+    padding: 5px 7px;
 
     @include normal {
       color: inherit;
@@ -130,10 +131,12 @@
 a.h1,
 a.h2 {
   font-weight: 700;
-  font-size: $base-size - 1px;
+  font-size: $base-size - 2px;
+  background: rgba($blue-5, .075);
+  padding: 7px;
 
   &:not(:first-child) {
-    padding-top: .75em;
+    margin-top: #{$base-line-height}em;
   }
 }
 
@@ -142,7 +145,13 @@ a.h4,
 a.h5,
 a.h6 {
   font-size: $base-size - 3px;
-  text-indent: .75em;
+  // background: rgba($blue-5, .025);
+
+  &:hover,
+  &:active,
+  &:focus {
+    background: rgba($blue-5, .025);
+  }
 }
 
 nav.secondary-content {
