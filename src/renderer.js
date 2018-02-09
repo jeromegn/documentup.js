@@ -1,4 +1,5 @@
 const marked = require('marked')
+const prismjs = require('prismjs')
 
 module.exports = class Renderer {
   constructor(login, repo) {

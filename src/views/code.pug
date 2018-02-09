@@ -38,8 +38,8 @@ html
                 - code = source.slice(Math.max(current.codeStart - 1, 0), nextComment.begin - 1).join("\n")
               else
                 - code = source.slice(current.codeStart).join("\n")
-              - code = hljs.highlightAuto(code)
               pre
-                code.hljs(class=code.language)
-                  != code.value
-            - commentsList = nextList
+                code(class=language)
+                  - syntax = Prism.languages[language]
+                  != (syntax && Prism.highlight(code, syntax)) || code
+          - commentsList = nextList

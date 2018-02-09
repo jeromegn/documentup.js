@@ -55,8 +55,18 @@ async function renderRepo(login, repoName) {
 const commentExtractor = require('multilang-extract-comments')
 const splitLines = require('split-lines')
 const arrayToLinkedlist = require('array-to-linkedlist')
+const extensions = {
+  'js': 'javascript',
+  'py': 'python',
+  'rb': 'ruby',
+  'ps1': 'powershell',
+  'psm1': 'powershell',
+  'sh': 'bash',
+  'bat': 'batch',
+  'h': 'c',
+  'tex': 'latex'
+};
 
-const hljs = require('highlight.js')
 const codeTpl = require('./views/code.pug')
 async function renderCode(login, repoName, filePath) {
   const renderFn = async function(){
@@ -64,6 +74,9 @@ async function renderCode(login, repoName, filePath) {
     if (response.status != 200) {
       return false
     }
+    const ext = (filePath.match(/\.(\w+)$/) || [, ''])[1]
+    const language = (extensions[ext] || ext)
+    console.log(language)
     const renderer = new Renderer(login, repoName)
     let source = await response.text()
     const comments = commentExtractor(source)
@@ -74,7 +87,7 @@ async function renderCode(login, repoName, filePath) {
     console.log("code has lines:", lines.length)
     console.log("found comment blocks:", Object.values(comments).length)
 
-    return codeTpl({ comments: arrayToLinkedlist(Object.values(comments)), source: lines, markdown: renderer, hljs: hljs })
+    return codeTpl({ comments: arrayToLinkedlist(Object.values(comments)), source: lines, markdown: renderer, language: language })
   }
   return tryCache(login + "/" + repoName + "/" + filePath, renderFn)
 }
