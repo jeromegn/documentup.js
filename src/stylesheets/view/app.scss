@@ -24,7 +24,6 @@
   h6 {
     &:not(:first-child) {
       padding-top: $vertical-margin;
-      // padding-top: calc(#{$vertical-margin} - .355em);
     }
   }
 }
@@ -94,42 +93,48 @@
 
 .secondary-content {
   flex: 0 1 auto;
-  padding: 90px 45px;
+  padding: 90px 0 90px 45px;
 
   @include until(1500px) {
-    padding: calc(45px + 4vw) calc(22.5px + 2vw);
+    padding: calc(45px + 4vw) 0 calc(45px + 4vw) calc(22.5px + 2vw);
   }
 
   a {
     display: flex;
     align-items: center;
     font-weight: 500;
+    color: inherit;
     white-space: nowrap;
     text-decoration: none;
     transition: color $duration;
     line-height: 1;
-    padding: 5px 7px;
+    padding: 5px 45px 5px 0;
 
-    @include normal {
-      color: inherit;
-    }
-
-    // Active state
-    &:hover,
-    &:focus,
-    &:active,
-    &.current {
-      color: $blue-3;
+    @include until(1500px) {
+      padding: 5px calc(22.5px + 2vw) 5px 0;
     }
   }
 }
 
+a#logo {
+  font-size: $base-size * 1.5;
+  font-weight: 600;
+  border-bottom: 1px solid rgba($blue-5, .2);
+}
+
 a.h1,
 a.h2 {
+  color: $black-3;
   font-weight: 700;
   font-size: $base-size - 2px;
-  background: rgba($blue-5, .075);
-  padding: 7px;
+
+  @include normal {
+    color: $black-3;
+  }
+
+  @include active {
+    color: $blue-3;
+  }
 
   &:not(:first-child) {
     margin-top: #{$base-line-height}em;
@@ -141,12 +146,13 @@ a.h4,
 a.h5,
 a.h6 {
   font-size: $base-size - 3px;
-  // background: rgba($blue-5, .025);
 
-  &:hover,
-  &:active,
-  &:focus {
-    background: rgba($blue-5, .025);
+  @include normal {
+    color: $black-1;
+  }
+
+  @include active {
+    color: $blue-3;
   }
 }
 

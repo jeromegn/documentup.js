@@ -10,6 +10,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(ico|svg|png|jpg|gif)$/,
+        use: ['file-loader']
+      },
+      {
         test: /\.css$/,
         use: ['to-string-loader', 'css-loader', 'postcss-loader']
       },

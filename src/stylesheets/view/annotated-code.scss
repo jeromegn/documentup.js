@@ -88,6 +88,7 @@ $fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 
       h#{$i} {
         font-size: map-get($headings, $i) * .8;
         margin-bottom: 16px;
+        margin-top: $vertical-margin;
       }
     }
 

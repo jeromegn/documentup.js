@@ -33,6 +33,9 @@ router.addRoute("/:login/:repo/*.*", async function (event, match) {
   return await renderCode(match.params.login, match.params.repo, match.splats.join("."))
 })
 
+// Someone fix this plz thx - <3 Kyle
+import img from './images/favicon.ico'
+
 const Renderer = require('./renderer')
 const Repository = require('./repository')
 const pageTpl = require('./views/page.pug')
