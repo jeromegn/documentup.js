@@ -1,0 +1,313 @@
+/* ========================================================================== *
+ * Global module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * Utility
+ * ------------------------------------- */
+
+// Remove the unit of a length
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+// Default browser font size
+$browser-context: 16;
+
+// Easily convert pixels to ems
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
+/* ===================================== *
+ * Color
+ * ------------------------------------- */
+
+// Slightly lighten a color
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+// Slightly darken a color
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// Encode colors - doesn’t work with strings containing alpha
+@function encodecolor($string) {
+  @if type-of($string) == 'color' {
+    $hex: str-slice(ie-hex-str($string), 4);
+    $string:unquote("#{$hex}");
+  }
+  $string: '%23' + $string;
+  @return $string;
+}
+
+// Palette - names from http://www.htmlcsscolor.com
+$green-1:     #6CECA1; // Medium aquamarine
+$green-2:     #4FDC96; // Shamrock
+$green-3:     #19BF81; // Mountain meadow
+$green-4:     #0D9E74; // Free speech aquamarine
+
+$red-1:       #FF3127; // Red orange
+$red-2:       #FA0D12; // Torch red
+$red-3:       #D50912; // Fire engine red
+$red-4:       #B00513; // Venetian red
+
+$violet-1:    #FF9BF2; // Lavender rose
+$violet-2:    #CD4BE3; // Medium orchid
+$violet-3:    #A525D8; // Dark orchid
+
+$violet-1:    #DBA6FA; // Mauve
+$violet-2:    #D18DF9; // Heliotrope
+$violet-3:    #C774F7; // Deep lilac
+$violet-4:    #AE4CEF; // Medium orchid
+$violet-5:    #8836C8; // Dark orchid
+
+$blue-1:      #CBE2FF; // Hawkes blue
+$blue-2:      #98C5ff; // Light sky blue
+$blue-3:      #65A8FF; // Jordy blue
+$blue-4:      #5381FF; // Cornflower blue
+$blue-5:      #4960bf; // Free speech blue
+
+$turquoise-1: #9AE6FF; // Columbia blue
+$turquoise-2: #61D8FF; // Turquoise
+$turquoise-3: #34B4FF; // Summer sky
+$turquoise-4: #1A9AEC; // Dodger blue
+$turquoise-5: #0080D8; // Navy blue
+
+$yellow-1:    #FFDA4C; // Mustard
+$yellow-2:    #FFCA16; // Turbo
+$yellow-3:    #F4B000; // Selective yellow
+$yellow-4:    #CB9200; // Dark goldenrod
+
+$pink-1:      #FF7AAE; // Tea rose
+$pink-2:      #FF4D75; // Wild watermelon
+$pink-3:      #FF2A49; // Radical red
+
+$white-1:     #FFFFFF; // White
+$white-2:     #F4F7Fb; // Alice blue
+$white-3:     #EBF1F8; // Solitude
+
+$gray-1:      #D9DCE7; // Mischka
+$gray-2:      #BBC4D3; // Link water
+$gray-3:      #8799A5; // Bali hai
+
+$black-1:     #6B7C93; // Slate gray
+$black-2:     #515971; // East bay
+$black-3:     #3B3B54; // Paynes gray
+
+/* ===================================== *
+ * Fonts
+ * ------------------------------------- */
+
+// Fonts stacks
+$base-font: -apple-system, BlinkMacSystemFont, 'Avenir Next', Avenir, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+$mono-font: 'Roboto Mono', Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', Courier, monospace;
+
+// Default font size & line spacing
+$base-size: 17px;
+$base-line-height: 1.47059;
+
+// Smooth fonts are smooth
+@mixin font-smoothing($value: on) {
+  @if $value == on {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  } @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+// 1.125 modular scale - http://www.modularscale.com/?18&px&1.125&web&text
+$headings: (
+  1: 2.011em,
+  2: 1.749em,
+  3: 1.521em,
+  4: 1.322em,
+  5: 1.15em,
+  6: 1em
+);
+
+/* ===================================== *
+ * Animations
+ * ------------------------------------- */
+
+// Transition duration
+$duration: .2s;
+
+// Class to prevent transitions
+.full-stop * {
+  &,
+  &:after,
+  &:before {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* ===================================== *
+ * Layout
+ * ------------------------------------- */
+
+// Block-level elements that get vertical margin
+$block-elements: p, ul, ol, h1, h2, h3, h4, h5, h6, pre, table, label, blockquote, hr, '.card', ':not(label) > input, :not(label) > select, :not(label) > textarea', '.inline-notification', '.input-group', '.toggle-group';
+
+// Border radius
+$radius: 3px;
+
+// Vertical margin
+$vertical-margin: $base-size * 1.2;
+
+// Main header height
+$header-height: 65px;
+
+// Inner header height
+$inner-header-height: 50px;
+
+// Sidebar width
+$sidebar-width: 225px;
+
+// Point at which mobile menu is visible
+$breakpoint: 800px;
+
+// Collapse top margin
+@mixin collapse-top {
+  > *:first-child,
+  > *:first-child > *:first-child,
+  > *:first-child > *:first-child > *:first-child {
+    margin-top: 0;
+  }
+}
+
+// Collapse bottom margin
+@mixin collapse-bottom {
+  > *:last-child,
+  > *:last-child > *:last-child,
+  > *:last-child > *:last-child > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Modules with max-width and padding
+@mixin padded-module($width: 1100px, $padding: null, $nested: true) {
+  padding-left: calc(50vw - #{$width / 2});
+  padding-right: calc(50vw - #{$width / 2});
+
+  @if $nested {
+    width: 100vw;
+  }
+
+  @if $padding {
+    @media (max-width: $width + $padding * 2) {
+      padding-left: $padding;
+      padding-right: $padding;
+    }
+  }
+}
+
+// Center an element to the viewport regardless of nesting
+@mixin center-to-viewport {
+  margin-left: calc(-50vw + 50%);
+  transform: translateX(calc(50vw - 50%));
+}
+
+/* ===================================== *
+ * Context
+ * ------------------------------------- */
+
+// Normal link state mixin
+@mixin normal {
+  &,
+  &:visited {
+    @content;
+  }
+}
+
+// Active link state mixin
+@mixin active {
+  &:hover,
+  &:focus,
+  &:active {
+    @content;
+  }
+}
+
+// Until width media query mixin
+@mixin until($width) {
+  $width: $width - 1;
+  @media all and (max-width: $width) {
+    @content;
+  }
+}
+
+// At least width media query mixin
+@mixin at-least($width) {
+  @media all and (min-width: $width) {
+    @content;
+  }
+}
+
+// Between widths media query mixin
+@mixin between($small-width, $large-width) {
+  $large-width: $large-width - 1;
+  @media (max-width: $large-width) and (min-width: $small-width) {
+    @content;
+  }
+}
+
+// High resolution screens media query mixin
+@mixin hdpi {
+  @media (min-device-pixel-ratio: 2), (min-resolution: 192dpi), (min-resolution: 2dppx) {
+    @content;
+  }
+}
+
+// Standard resolution screens media query mixin
+@mixin sdpi {
+  @media (max-device-pixel-ratio: 1.99), (max-resolution: 191dpi), (min-resolution: 1.99dppx) {
+    @content;
+  }
+}
+
+/* ===================================== *
+ * Visibility
+ * ------------------------------------- */
+
+// Visually hidden mixin
+@mixin hidden() {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap !important;
+  width: 1px !important;
+}
+
+// Visually hidden class (obvi)
+.hidden {
+  @include hidden;
+}
+
+// Whiten svg graphics mixin
+@mixin whiten($background: $blue-3, $foreground: $white-1) {
+  .light {
+    fill: $foreground;
+  }
+
+  .dark {
+    fill: $background;
+  }
+
+  .translucent {
+    fill-opacity: .5;
+  }
+}

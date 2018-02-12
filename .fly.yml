@@ -1,4 +1,12 @@
-port: 4000
+default: &default
+  app_id: fly/documentup
 
-app:
-  id: js-documentup-com
+development:
+  <<: *default
+  app_id: super-fly/documentup
+
+test:
+  <<: *default
+
+production:
+  <<: *default

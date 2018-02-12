@@ -1,7 +1,7 @@
 module.exports = {
   entry: './src/index.js',
   resolve: {
-    extensions: ['.js', '.css', '.scss', '.pug']
+    extensions: ['.js', '.css', '.scss', '.pug', '.md']
   },
   output: {
     filename: 'documentup.js',
@@ -9,10 +9,14 @@ module.exports = {
   },
   module: {
     rules: [
-      // {
-      //   test: /\.css$/,
-      //   use: ['to-string-loader', 'css-loader', 'postcss-loader']
-      // },
+      {
+        test: /\.(ico|svg|png|jpg|gif)$/,
+        use: ['file-loader']
+      },
+      {
+        test: /\.css$/,
+        use: ['to-string-loader', 'css-loader', 'postcss-loader']
+      },
       {
         test: /\.scss$/,
         use: ['to-string-loader', 'css-loader', 'postcss-loader', 'sass-loader']
@@ -20,6 +24,10 @@ module.exports = {
       {
         test: /\.pug$/,
         use: ['pug-loader']
+      },
+      {
+        test: /\.md$/,
+        use: ['raw-loader']
       }
     ]
   }

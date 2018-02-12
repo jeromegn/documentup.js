@@ -1,0 +1,246 @@
+/* ========================================================================== *
+ * Text module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * Utility
+ * ------------------------------------- */
+
+// Inline links
+@mixin inline-link($color: $blue-3) {
+  text-decoration: underline;
+  text-decoration-color: rgba($color, .4);
+  transition: $duration;
+
+  // Default state
+  @include normal {
+    color: $color;
+    text-decoration-color: rgba($color, .4);
+  }
+
+  // Active state
+  @include active {
+    color: $color;
+    text-decoration-color: $color;
+  }
+}
+
+/* ===================================== *
+ * Common
+ * ------------------------------------- */
+
+body,
+input,
+select,
+button,
+textarea {
+  color: $black-3;
+  font-family: $base-font;
+  line-height: $base-line-height;
+  @include font-smoothing;
+}
+
+/* ===================================== *
+ * Heading
+ * ------------------------------------- */
+
+@for $i from 1 through length($headings) {
+  h#{$i} {
+    font-size: map-get($headings, $i);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 600;
+  letter-spacing: .005em;
+}
+
+/* ===================================== *
+ * Paragraph
+ * ------------------------------------- */
+
+
+/* ===================================== *
+ * Blockquote
+ * ------------------------------------- */
+
+// Blockquotes
+blockquote {
+  color: $gray-3;
+  font-size: 1.275em;
+  padding-left: 1.275em;
+  border-left: 4px solid $green-3;
+
+  cite {
+    font-style: normal;
+    font-weight: 700;
+  }
+}
+
+/* ===================================== *
+ * Inline
+ * ------------------------------------- */
+
+// Subscripts & superscripts
+sub,
+sup {
+  vertical-align: baseline;
+  position: relative;
+  line-height: 0;
+  font-size: 75%;
+}
+
+sub {
+  bottom: -.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+// Highlighted marks
+mark {
+  background: lighten($yellow-1, 15);
+}
+
+// Definitions & Abbreviations
+dfn[title],
+abbr[title] {
+  position: relative;
+  cursor: help;
+  font-style: normal;
+  border-bottom: 1px dashed $gray-3;
+
+  &:after,
+  &:before {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+    transition: $duration;
+  }
+
+  &:after {
+    content: attr(title);
+    top: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    color: $white-1;
+    font-size: 14px;
+    text-align: center;
+    white-space: nowrap;
+    padding: 2px 10px;
+    border-radius: $radius;
+    background: $black-3;
+  }
+
+  &:before {
+    content: '';
+    left: calc(50% - 5px);
+    top: 100%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 6px 5px;
+    border-color: transparent transparent $black-3 transparent;
+  }
+
+  &:hover:after,
+  &:hover:before {
+    opacity: 1;
+    z-index: 2;
+  }
+}
+
+// Links & buttons
+a,
+button {
+  cursor: pointer;
+}
+
+a {
+  @include inline-link;
+}
+
+/* ===================================== *
+ * Horizontal rule
+ * ------------------------------------- */
+
+hr {
+  border: solid $gray-1;
+  border-width: 1px 0 0 0;
+}
+
+/* ===================================== *
+ * Preformatted text
+ * ------------------------------------- */
+
+pre,
+code,
+kbd,
+samp {
+  font-family: $mono-font;
+  direction: ltr;
+  text-align: left;
+  tab-size: 2;
+  hyphens: none;
+  tab-size: 2;
+  hyphens: none;
+}
+
+pre {
+  overflow: auto;
+  padding: 1.275em;
+  border-radius: $radius;
+  background: $white-2;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+:not(pre) > code,
+:not(pre) > kbd,
+:not(pre) > samp {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  white-space: pre-wrap;
+  letter-spacing: normal;
+  border-radius: $radius;
+  padding: 0 .375em .075em;
+  background: $white-2;
+}
+
+pre,
+:not(pre) > code,
+:not(pre) > kbd,
+:not(pre) > samp {
+  font-size: .94em;
+}
+
+/* ===================================== *
+ * Text alignment
+ * ------------------------------------- */
+
+.text-left {
+  text-align: left;
+
+  table &:first-child .button:last-child {
+    margin-right: -8px;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+
+  table &:last-child .button:last-child {
+    margin-right: -8px;
+  }
+}

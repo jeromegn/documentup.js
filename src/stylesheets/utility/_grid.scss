@@ -1,0 +1,108 @@
+/* ========================================================================== *
+ * b. Grid module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * i. Utilities
+ * ------------------------------------- */
+
+ // Grid init mixin (use on parent elements)
+@mixin grid($direction: row) {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  flex-direction: $direction;
+}
+
+// Grid gutter mixin (use on parent elements)
+@mixin gutter($amount: 0, $both: off) {
+  margin-left:  $amount * -.5;
+  margin-right: $amount * -.5;
+
+  @if $both == on {
+    margin-top: -$amount;
+  }
+
+  > * {
+    padding-left:  $amount * .5;
+    padding-right: $amount * .5;
+
+    @if $both == on {
+      margin-bottom: 0;
+      margin-top: $amount;
+    }
+  }
+}
+
+// Grid alignment mixin (use on parent elements)
+@mixin align($x-axis: left, $y-axis: top) {
+
+  // Map horizontal params
+  $horizontal: (
+    left:   flex-start,
+    center: center,
+    right:  flex-end
+  );
+
+  // Map vertical params
+  $vertical: (
+    top:    flex-start,
+    middle: center,
+    bottom: flex-end
+  );
+
+  // Assign appropriate horizontal property
+  @if map-has-key($horizontal, $x-axis) {
+    justify-content: map-get($horizontal, $x-axis);
+  }
+
+  // Assign appropriate vertical property
+  @if map-has-key($vertical, $y-axis) {
+    align-items: map-get($vertical, $y-axis);
+  }
+}
+
+// Column span function (use for the maths)
+@function span($cols) {
+  @return nth($cols, 1) / nth($cols, 3) * 100%;
+}
+
+// Column span mixin (use on child elements)
+@mixin span($cols: auto, $breakpoint: 34em) {
+
+  // Universal styles
+  flex: 0 0 auto;
+  max-width: inherit;
+
+  // Full width
+  @if $cols == auto {
+    flex-grow: 1;
+    flex-basis: 0;
+    width: 100%;
+  }
+
+  // 1 - 8 of 8 columns
+  @elseif length($cols) > 1 {
+    flex-basis: span($cols);
+    width: span($cols);
+  }
+
+  // Explicit column width
+  @else {
+    flex-basis: $cols;
+    width: $cols;
+  }
+
+  // Stack cells at breakpoint
+  @media (max-width: $breakpoint) {
+    flex-basis: 100%;
+    width: auto;
+    max-width: unset;
+    margin-left: 0;
+  }
+}
+
+// Column offset mixin (use on child elements)
+@mixin offset($offset: 1) {
+  margin-left: span($offset);
+}

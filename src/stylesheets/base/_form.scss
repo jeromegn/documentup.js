@@ -1,0 +1,759 @@
+/* ========================================================================== *
+ * e. Form module
+ * -------------------------------------------------------------------------- */
+
+/* ===================================== *
+ * i. Utility
+ * ------------------------------------- */
+
+// Universal text-based input variable
+$text-inputs: 'textarea, input[type=url], input[type=tel], input[type=text], input[type=email], input[type=number], input[type=password]';
+
+// Nested labels
+@mixin nested-label($size: normal, $spacing: on) {
+
+  // Scoped variables
+  $font-size: if($size == large,  17px,  16px);
+  $padding-y: if($size == large,  12px,   9px);
+  $padding-x: if($size == large,  14px,  12px);
+  $margin:    if($size == large,  19px,  25px);
+  $distance:  if($size == large, -24px, -22px);
+  $scale:     if($size == large,  .824,  .875);
+  $height:    if($size == large,  56px,  50px);
+
+  @if $spacing != on {
+    $margin: 0;
+  }
+
+  // Active state
+  %active {
+    z-index: 2;
+    transform: translate3d(0, $distance, 0) scale($scale);
+  }
+
+  // Hide input placeholder text
+  ::placeholder {
+    opacity: 0;
+    color: transparent;
+  }
+
+  // Input labels
+  label {
+    padding: 0;
+    clear: both;
+    flex: 1 0 auto;
+    background: $white-1;
+    font-size: $font-size;
+    margin-bottom: $margin;
+  }
+
+  // Default active color
+  :not(.valid):not(.invalid) > {
+    textarea,
+    #{$text-inputs} {
+      &:focus + span,
+      &:active + span {
+        color: darken($black-1, 10);
+      }
+    }
+  }
+
+  // Validated label
+  .valid > {
+    textarea,
+    #{$text-inputs} {
+
+      // Active state
+      + span {
+        @extend %active;
+      }
+
+      // Non-required active color
+      &:not(:required):focus + span,
+      &:not(:required):active + span {
+        color: darken($black-1, 10);
+      }
+
+      // Required active color
+      &:required + span {
+        color: $green-2;
+      }
+    }
+  }
+
+  // Invalidated label
+  .invalid > {
+    textarea,
+    #{$text-inputs} {
+
+      // Active state
+      + span {
+        @extend %active;
+      }
+
+      // Non-required active color
+      &:not(:required):focus + span,
+      &:not(:required):active + span {
+        color: darken($black-1, 10);
+      }
+
+      // Required active color
+      &:required + span {
+        color: $pink-3;
+      }
+    }
+  }
+
+  // Select-specific styles
+  select {
+    margin: 0;
+    font-size: $font-size;
+    line-height: inherit;
+    height: $height;
+    padding: $padding-y $padding-x;
+  }
+
+  // Inputs
+  textarea,
+  #{$text-inputs} {
+    z-index: 1;
+    margin: 0;
+    font-size: $font-size;
+    line-height: inherit;
+    background: transparent;
+    padding: $padding-y $padding-x;
+
+    // Faux-placeholder labels
+    & + span {
+      background: $white-1;
+      box-shadow:
+        -6px 0 $white-1,
+         6px 0 $white-1;
+      font-size: inherit;
+      height: 30px; // 30px
+      position: absolute;
+      top: $padding-y;
+      left: $padding-x;
+      padding: 1px 0 0 1px;
+      transform-origin: left top 0;
+      will-change: transform;
+      -webkit-filter: blur(0);
+      backface-visibility: hidden;
+      -webkit-font-smoothing: subpixel-antialiased;
+      z-index: 0;
+      color: $gray-2;
+      transform: translate3d(0, 0, 0) scale(1);
+      transition:
+        z-index $duration,
+        color $duration,
+        transform $duration;
+    }
+
+    // Move labels out of the way on focus
+    &:focus + span,
+    &:active + span {
+      @extend %active;
+    }
+  }
+}
+
+// Inline forms
+@mixin inline-form($size: normal, $gutter: 10px) {
+  @include nested-label($size, off);
+  @include grid;
+
+  // Remove top spacing from submit button
+  > [type=submit] {
+    margin-top: 0;
+  }
+
+  // Leave right margin off last element
+  > :not(:last-child) {
+    margin-right: $gutter;
+  }
+}
+
+/* ===================================== *
+ * ii. Common
+ * ------------------------------------- */
+
+// Remove default fieldset styles
+fieldset {
+  border: 0;
+  padding: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+// Fieldset legends
+legend {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  font-weight: 600;
+  padding-top: 11px;
+  margin-bottom: 19px;
+  box-shadow: 0 2px $white-3;
+  width: 100%;
+}
+
+// Legends that look like labels
+.faux-label {
+  font-size: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+// Placeholder text color
+::placeholder {
+  opacity: 1;
+  color: $gray-2;
+}
+
+// Remove FF’s default input outline
+input::-moz-focus-inner {
+  border: 0;
+}
+
+// Labels
+label {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  font-size: 15px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+
+  // Checkbox- & radio-specific labels
+  &[data-tick] {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 5px;
+    font-weight: inherit;
+    font-size: 14px;
+    padding: 0;
+
+    // Siblings
+    & + [data-tick] {
+      margin-top: -5px;
+    }
+  }
+
+  // Bare text-based inputs
+  + input,
+  + select,
+  + textarea {
+    margin-top: -5px;
+  }
+
+  // Nested text-based inputs
+  > input,
+  > select,
+  > textarea {
+    margin-top: 5px;
+  }
+
+  // Nested range inputs
+  > input[type=range] {
+    margin-top: 12px;
+    margin-bottom: 5px;
+  }
+}
+
+/* ===================================== *
+ * iii. Text-based
+ * ------------------------------------- */
+
+// Inputs
+input,
+select,
+textarea {
+  width: 100%;
+  font-size: 15px;
+  line-height: 30px; // 30px
+  padding: 9px 12px;
+  border: 2px solid $white-3;
+  border-radius: $radius;
+  transition: border $duration;
+  background-clip: padding-box;
+  appearance: none;
+
+  // Keep Chrome’s autofilled fields white
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px $white-1 inset;
+  }
+
+  &:hover {
+    border-color: $gray-2;
+  }
+
+  &:focus,
+  &:active {
+    outline: 0;
+    border-color: $blue-1;
+  }
+}
+
+// Bare inputs
+:not(label) > {
+  input,
+  select,
+  textarea {
+    margin-bottom: 10px;
+  }
+}
+
+// Override default search styling
+input[type=search] {
+  &,
+  &::-webkit-search-decoration,
+  &::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+  }
+}
+
+// Confine resizing of textareas
+textarea {
+  display: block;
+  resize: vertical;
+  max-height: 300px + 5px; // 305px
+  min-height: 120px + 5px;  // 125px;
+}
+
+/* ===================================== *
+ * iv. Select
+ * ------------------------------------- */
+
+// Select inputs
+select {
+  height: 50px;
+  cursor: pointer;
+  background: $white-1 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 14'%3E%3Cpolygon fill='%238799A5' points='3.5,0 0,6 7,6'/%3E%3Cpolygon fill='%238799A5' points='3.5,14 0,8 7,8'/%3E%3C/svg%3E") calc(100% - 14px) 50% / 7px 14px no-repeat;
+}
+
+/* ===================================== *
+ * v. Radio button & checkbox
+ * ------------------------------------- */
+
+// Radios & checkboxes
+[data-tick] {
+
+  input[type=radio],
+  input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin-right: -20px;
+    opacity: 0;
+    z-index: -1;
+
+    &:focus + span,
+    &:active + span {
+      box-shadow: 0 0 0 2px $blue-1 inset;
+    }
+
+    + span {
+      width: 20px;
+      height: 20px;
+      margin: 0 8px 0 0;
+      cursor: pointer;
+      background: $white-1;
+      transition: box-shadow $duration;
+      box-shadow: 0 0 0 2px $white-3 inset;
+
+      &:hover,
+      &:focus,
+      &:active {
+        outline: 0;
+        box-shadow: 0 0 0 2px $gray-2 inset;
+      }
+    }
+  }
+
+  // Radios
+  input[type=radio] {
+
+    + span {
+      border-radius: 50%;
+    }
+
+    &:checked + span {
+      box-shadow: 0 0 0 8px $blue-1 inset;
+    }
+  }
+
+  // Checkboxes
+  input[type=checkbox] {
+
+    + span {
+      border-radius: $radius;
+      position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 60%;
+        margin: 15% 0 0 0;
+        border: solid $white-1;
+        border-width: 0 0 3px 3px;
+        transition: transform $duration;
+        transform: scale(0) rotate(-45deg);
+      }
+    }
+
+    &:checked + span {
+      box-shadow: 0 0 0 10px $blue-1 inset;
+    }
+
+    &:checked + span:before {
+      transform: scale(.5) rotate(-45deg);
+    }
+  }
+}
+
+// Fancy toggle buttons
+[data-tick-group] {
+
+  label {
+    display: inline-flex;
+    cursor: pointer;
+
+    &:first-child span {
+      border-radius: $radius 0 0 $radius;
+    }
+
+    &:last-child span {
+      border-radius: 0 $radius $radius 0;
+    }
+
+    &:not(:first-child) span {
+      margin-left: -2px;
+    }
+  }
+
+  // And style the label and its children
+  span {
+    position: relative;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    background: $white-1;
+    padding: 9px 15px;
+    text-align: center;
+    color: $gray-3;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 0 0 2px $white-3 inset;
+    transition:
+      color $duration,
+      background $duration,
+      box-shadow $duration,
+      z-index $duration;
+
+    .icon {
+      margin-right: 6px;
+    }
+  }
+
+  input[type=radio] {
+
+    // Hide the real radio button
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+
+    &:hover + span {
+      color: $blue-1;
+      z-index: 1;
+      box-shadow: 0 0 0 2px $gray-2 inset;
+    }
+
+    // Checked state
+    &:checked + span {
+      z-index: 2;
+      cursor: default;
+      color: $white-1;
+      background: $blue-1;
+      box-shadow: 0 0 0 2px $blue-1 inset;
+    }
+  }
+}
+
+// Card-style toggle groups
+[data-tick-group=card] {
+
+  label {
+    &:not(:first-child) span {
+      margin-left: 6px;
+    }
+
+    &:first-child span,
+    &:last-child span {
+      border-radius: $radius;
+    }
+  }
+
+  span {
+    padding: 22px;
+    line-height: 15px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: $radius;
+
+    .icon {
+      width: 22px;
+      height: 22px;
+      margin-right: 0;
+      margin-bottom: 8px;
+    }
+  }
+}
+
+/* ===================================== *
+ * vi. Range slider
+ * ------------------------------------- */
+
+// Range sliders
+input[type=range] {
+  background-color: $gray-2;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  outline: 0;
+  border: 0;
+  padding: 0;
+  display: flex;
+  position: relative;
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  // Firefox track
+  &::-moz-range-track {
+    -moz-appearance: none;
+    opacity: 0;
+  }
+
+  // Remove default Firefox focus styles
+  &::-moz-focus-outer {
+    border: 0;
+  }
+
+  // Webkit thumb
+  &::-webkit-slider-thumb {
+    border: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: $white-1;
+    -webkit-appearance: none;
+    background: rgba($black-1, .25);
+    border: 1px solid rgba($black-1, .25);
+    box-shadow:
+      0 0 0 8px $white-1 inset,
+      0 0 0 10px $black-1 inset;
+    transition:
+      border $duration,
+      box-shadow $duration;
+  }
+
+  &:hover::-webkit-slider-thumb {
+    border: 1px solid $black-1;
+  }
+
+  &:focus::-webkit-slider-thumb,
+  &:active::-webkit-slider-thumb {
+    border: 1px solid $blue-1;
+    box-shadow:
+      0 0 0 8px $white-1 inset,
+      0 0 0 10px $blue-1 inset;
+  }
+
+  // Firefox thumb
+  &::-moz-range-thumb {
+    border: 0;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    -moz-appearance: none;
+    box-sizing: border-box;
+    background: rgba($black-1, .25);
+    border: 1px solid rgba($black-1, .25);
+    box-shadow:
+      0 0 0 8px $white-1 inset,
+      0 0 0 10px $black-1 inset;
+    transition:
+      border $duration,
+      box-shadow $duration;
+  }
+
+  &:hover::-moz-range-thumb {
+    border: 1px solid $black-1;
+  }
+
+  &:focus::-moz-range-thumb,
+  &:active::-moz-range-thumb {
+    border: 1px solid $blue-1;
+    box-shadow:
+      0 0 0 8px $white-1 inset,
+      0 0 0 10px $blue-1 inset;
+  }
+}
+
+/* ===================================== *
+ * vii. Other HTML5
+ * ------------------------------------- */
+
+// Color inputs
+input[type=color] {
+  appearance: none;
+  width: 50px;
+  height: 50px;
+  padding: 5px 3px;
+  background: $white-1;
+  border: 1px solid $gray-2;
+  border-radius: $radius;
+  cursor: crosshair;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $black-1;
+  }
+
+  &::-webkit-color-swatch-wrapper {
+    background: $white-1;
+    padding: 0 2px;
+  }
+}
+
+input[type=date],
+input[type=month],
+input[type=week],
+input[type=datetime],
+input[type=datetime-local] {
+  height: 50px;
+}
+
+/* ===================================== *
+ * viii. Button
+ * ------------------------------------- */
+
+// Form buttons
+input[type=button],
+button[type=button] {
+  @include button;
+}
+
+/* ===================================== *
+ * ix. Validation
+ * ------------------------------------- */
+
+// Apply validation styles to inputs & textareas
+textarea, #{$text-inputs} {
+
+  // Strip default styling
+  &:invalid {
+    outline: 0;
+    box-shadow: none;
+  }
+
+  // Apply valid state color to required fields & adjacent labels
+  &.valid:required,
+  .valid &:required {
+    color: $green-2;
+  }
+
+  // Apply valid state to required fields
+  &.valid:required,
+  .valid &:required   {
+    border-color: $green-2;
+  }
+
+  // Apply invalid state color to required fields & adjacent labels
+  &.invalid:required,
+  .invalid &:required {
+    color: $pink-3;
+  }
+
+  // Apply invalid state to required fields
+  &.invalid:required,
+  .invalid &:required {
+    border-color: $pink-3;
+  }
+
+  // Apply valid state to Chrome’s autofilled fields
+  &.valid:required:-webkit-autofill,
+  .valid &:required:-webkit-autofill {
+    -webkit-text-fill-color: $green-2;
+  }
+
+  // Apply invalid state to Chrome’s autofilled fields
+  &.invalid:required::-webkit-autofill,
+  .invalid &:required::-webkit-autofill {
+    -webkit-text-fill-color: $pink-3;
+  }
+}
+
+// Validation message animation declaration
+@keyframes scale-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -6px) scale(.5);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 6px) scale(1);
+  }
+}
+
+// Inline validation messages
+.validation-message {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 325px;
+  max-width: 100vw;
+  z-index: 3;
+  text-align: center;
+  transform: translate(-50%, 6px) scale(1);
+  transform-origin: center top;
+  animation: scale-fade-in $duration ease-out;
+
+  // Message bubble (also a hack to maintain proper word wrap)
+  p {
+    display: inline-block;
+    margin: 0;
+    padding: 12px 18px;
+    border-radius: $radius;
+    background: $black-1;
+    color: $white-1;
+    font-size: 14px;
+    line-height: 21px;
+
+    // Message bubble triangle
+    &:before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      margin-left: -6px;
+      bottom: 100%;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 6px 6px 6px;
+      border-color: transparent transparent $black-1 transparent;
+    }
+  }
+}

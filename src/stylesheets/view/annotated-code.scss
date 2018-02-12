@@ -1,0 +1,122 @@
+/* ========================================================================== *
+ * Annotated code view module
+ * -------------------------------------------------------------------------- */
+
+@mixin fluid-padding {
+  padding-left: 50px;
+  padding-right: 50px;
+
+  @include at-least(1000px) {
+    padding-left: calc(20px + 2vw);
+    padding-right: calc(20px + 2vw);
+  }
+}
+
+$sidebar-width: 38.2%;
+$document-width: 100% - $sidebar-width;
+$fluid-sidebar-width: '50vw - 800px + (1600px * #{strip-unit($sidebar-width)} / 100)';
+
+.annotated-code {
+  @include padded-module(1600px);
+
+  pre,
+  code {
+    background: $white-1;
+    box-shadow: none;
+  }
+
+  pre {
+    padding: 20px;
+  }
+
+  @include until(1000px) {
+    background: $white-2;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @include at-least(1000px) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: baseline;
+  }
+
+  @include between(1000px, 1600px) {
+    background:
+      linear-gradient(
+        to right,
+        transparent,
+        rgba($blue-5, .025),
+        rgba($blue-5, .075)
+      ) calc(100vw * (#{strip-unit($sidebar-width)} / 100) - 15px) 0 / 15px 1px repeat-y,
+      linear-gradient(
+        to right,
+        $white-2 $sidebar-width,
+        $white-1 $sidebar-width
+      ),
+      $white-2;
+  }
+
+  @include at-least(1600px) {
+    background:
+      linear-gradient(
+        to right,
+        transparent,
+        rgba($blue-5, .025),
+        rgba($blue-5, .075)
+      ) calc(#{$fluid-sidebar-width} - 15px) 0 / 15px 1px repeat-y,
+      linear-gradient(
+        to right,
+        $white-2 calc(#{$fluid-sidebar-width}),
+        $white-1 calc(#{$fluid-sidebar-width})
+      ),
+      $white-2;
+  }
+}
+
+.annotation {
+  @include at-least(1000px) {
+    flex: 0 1 #{$sidebar-width};
+    @include fluid-padding;
+
+    &:first-child {
+      padding-top: 40px;
+    }
+
+    // Headings
+    @for $i from 1 through length($headings) {
+      h#{$i} {
+        font-size: map-get($headings, $i) * .8;
+        margin-bottom: 16px;
+        margin-top: $vertical-margin;
+      }
+    }
+
+    pre {
+      font-size: 14px;
+      padding: 15px 20px;
+    }
+  }
+}
+
+.code {
+  // margin-bottom: $vertical-margin;
+
+  @include at-least(1000px) {
+    flex: 0 1 #{$document-width};
+    padding-bottom: #{$base-line-height}em;
+    // margin: 0;
+    @include fluid-padding;
+
+    &:first-of-type {
+      padding-top: 50px;
+    }
+
+    pre,
+    code {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+  }
+}

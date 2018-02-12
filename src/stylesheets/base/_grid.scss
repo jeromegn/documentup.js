@@ -1,0 +1,45 @@
+.grid {
+  @include grid;
+  @include gutter(2em);
+  &.no-gutter {
+    @include gutter(0);
+  }
+}
+
+.span-1-of-6 {
+  @include span(1 of 6);
+}
+
+.span-1-of-4 {
+  @include span(1 of 4);
+}
+
+.span-1-of-3,
+.span-2-of-6 {
+  @include span(1 of 3);
+}
+
+.span-1-of-2,
+.span-3-of-6 {
+  @include span(1 of 2);
+}
+
+.span-2-of-3,
+.span-4-of-6 {
+  @include span(2 of 3);
+}
+
+.span-3-of-4 {
+  @include span(3 of 4);
+}
+
+.span-5-of-6 {
+  @include span(5 of 6);
+}
+
+.span-1-of-1,
+.span-2-of-2,
+.span-3-of-3,
+.span-6-of-6 {
+  @include span(1 of 1);
+}
