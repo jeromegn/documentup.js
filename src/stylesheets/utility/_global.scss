@@ -15,6 +15,14 @@
   @return $number;
 }
 
+// Default browser font size
+$browser-context: 16;
+
+// Easily convert pixels to ems
+@function em($pixels, $context: $browser-context) {
+  @return #{$pixels/$context}em;
+}
+
 /* ===================================== *
  * Color
  * ------------------------------------- */
@@ -118,12 +126,12 @@ $base-line-height: 1.47059;
 
 // 1.125 modular scale - http://www.modularscale.com/?18&px&1.125&web&text
 $headings: (
-  1: $base-size * 1.802,
-  2: $base-size * 1.602,
-  3: $base-size * 1.424,
-  4: $base-size * 1.266,
-  5: $base-size * 1.125,
-  6: $base-size
+  1: 2.011em,
+  2: 1.749em,
+  3: 1.521em,
+  4: 1.322em,
+  5: 1.15em,
+  6: 1em
 );
 
 /* ===================================== *

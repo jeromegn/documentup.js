@@ -22,13 +22,9 @@
   h4,
   h5,
   h6 {
-    display: flex;
-    flex-flow: row wrap;
-    align-items: center;
-    white-space: pre-wrap;
-
     &:not(:first-child) {
       padding-top: $vertical-margin;
+      // padding-top: calc(#{$vertical-margin} - .355em);
     }
   }
 }

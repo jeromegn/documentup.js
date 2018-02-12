@@ -184,7 +184,6 @@ code,
 kbd,
 samp {
   font-family: $mono-font;
-  font-size: $base-size - 1px;
   direction: ltr;
   text-align: left;
   tab-size: 2;
@@ -205,14 +204,21 @@ pre {
 :not(pre) > code,
 :not(pre) > kbd,
 :not(pre) > samp {
-  line-height: 1;
   overflow-wrap: break-word;
   word-wrap: break-word;
   word-break: break-all;
   white-space: pre-wrap;
+  letter-spacing: normal;
   border-radius: $radius;
-  padding: 0 4px 1px;
+  padding: 0 .375em .075em;
   background: $white-2;
+}
+
+pre,
+:not(pre) > code,
+:not(pre) > kbd,
+:not(pre) > samp {
+  font-size: .94em;
 }
 
 /* ===================================== *

@@ -8,9 +8,10 @@ module.exports = class Renderer {
     this.baseUrl = `/${login}/${repo}/`
 
     this.renderer.heading = (text, level, raw) => {
+      raw = raw.replace(/`/g, "")
       const id = raw.toLowerCase().replace(/\s+/, "-").replace(/[^\w-]+/, "")
       if (level > 1)
-        this.tableOfContents.push({ id: id, level: level, text: text })
+        this.tableOfContents.push({ id: id, level: level, text: raw })
       return `<h${level} id="${id}">${text}</h${level}>\n`
     }
 
